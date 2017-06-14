@@ -1,0 +1,42 @@
+<plugin>
+	<nom><multi>[fr]Site multilingue facile</multi></nom>
+	<slogan>Créer facilement un site multilingue</slogan>
+	<auteur>[Rainer M&uuml;ller->http://websimple.be]</auteur>
+	<version>1.0.6</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]
+			Met en place un site multilingue avec une langue par secteur.
+	
+			Le plugin force l\'installation de, plusieurs plugin
+			
+			- [Traduction entre rubriques->http://plugins.spip.net/tradrub.html]
+			- [Langue préférée par l’internaute ->http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute]
+			- [Traductions de rubriques autrement->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
+			- [Traductions d’articles autremen->http://contrib.spip.net/Traductions-d-articles-autrement-3]
+			
+			Sous Spip 2 ou 2.1 il es recommendable d\'installer auparavant le plugin [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], puis d'installer ce plugin ce qui forcera également l\'installation de tous les autres plugin nécessaires.
+					
+			Le plugin modifie également quelques squelettes (rubriques et articles) et quelques noisettes de bases.
+			
+			Une fois installé les plugins nécessaires, il vous suffira de déterminer les langues du site dans "Configuration"->"Mulilinguisme/Gestion des langues"
+		
+			et voilà votre site est multilingue
+		</multi>	
+	</description>
+	<lien>http://contrib.spip.net/Site-multilingue-facile</lien>
+	<licence>GNU/GPL</licence>
+	<prefix>multilingue</prefix>
+	<icon>prive/themes/spip/images/multilingue-64.png</icon>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="spip_bonux" version="[2.3.3;]" />	
+	<necessite id="tradrub" version="[2.1.1;]" />	
+	<necessite id="languepreferee" version="[0.4.3;]" />	
+	<necessite id="trad_rub" version='[0.1.2;]'/>	
+	<necessite id="taa" version='[0.3.4;]'/>	
+	<necessite id="cfg" version='[1.16.1;]'/>	
+	<utilise id="z" version='[1.7.21;]'/>	
+	<traduire gestionnaire="salvatore" module="multilingue" reference="fr" />
+</plugin>

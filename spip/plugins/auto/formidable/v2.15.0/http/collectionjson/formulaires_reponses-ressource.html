@@ -1,0 +1,11 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){id_formulaires_reponse}{statut?}>
+{
+	"collection": {
+		"version": "1.0",
+		"href": "[(#VAL{&}|self|url_absolue)]",
+		"items": [
+			<INCLURE{fond=http/collectionjson/inc-formulaires_reponse, id_formulaires_reponse, mode, url_self=#SELF}>
+		]
+	}
+}
+</BOUCLE_formulaires_reponse>

@@ -1,0 +1,10 @@
+<traduction module="formulaire" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/formulaire?lang_cible=fr" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/formulaire?lang_cible=pt_br" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/formulaire?lang_cible=ru" total="5" traduits="4" relire="0" modifs="0" nouveaux="1" pourcent="80.00">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+</traduction>

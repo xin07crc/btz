@@ -1,0 +1,22 @@
+#CACHE{0}
+ [(#REM) Si on est dans le contexte d'un article, on affiche les langues des articles]
+ <BOUCLE_article(ARTICLES){id_article}>
+         <BOUCLE_traductions(ARTICLES) {traduction} {par lang}>
+			 <option value='[(#URL_ACTION_AUTEUR{'converser',#LANG&var_lang=#LANG,[(#URL_ARTICLE|parametre_url{lang,'','&'})]}|parametre_url{arg,''})]'[(#LANG|=={#ENV{lang}}|oui)selected="selected"] dir="[(#LANG|lang_dir{ltr,rtl})]">[(#LANG|traduire_nom_langue)]</option>	
+         </BOUCLE_traductions>
+ </BOUCLE_article>
+         [(#REM) Sinon, si on est dans le contexte d'une rubrique, on affiche les langues des rubriques]
+            <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+                    <BOUCLE_traductions_rub(RUBRIQUES) {traduction} {par lang}>
+						<option value='[(#URL_ACTION_AUTEUR{'converser',#LANG&var_lang=#LANG,[(#URL_RUBRIQUE|parametre_url{lang,'','&'})]}|parametre_url{arg,''})]'[(#LANG|=={#ENV{lang}}|oui)selected="selected"] dir="[(#LANG|lang_dir{ltr,rtl})]">[(#LANG|traduire_nom_langue)]</option>	
+                     </BOUCLE_traductions_rub>
+       </BOUCLE_rubrique>
+         [(#REM) Sinon, si on on boucle sur les langues disponibles dans le public grâce à spip-bonux]
+              <BOUCLE_langue_possibles(RUBRIQUES){id_parent=0}{id_trad!=0}{0,1}>
+                 <BOUCLE_langue_possibles_trad(RUBRIQUES) {traduction} {par lang}>
+						<option value='[(#URL_ACTION_AUTEUR{'converser',#LANG&var_lang=#LANG,[(#SELF|parametre_url{lang,'','&'})]}|parametre_url{arg,''})]'[(#LANG|=={#ENV{lang}}|oui)selected="selected"] dir="[(#LANG|lang_dir{ltr,rtl})]">[(#LANG|traduire_nom_langue)]</option>
+                  </BOUCLE_langue_possibles_trad>
+                </BOUCLE_langue_possibles> 
+        
+         <//B_rubrique>
+ <//B_article>       

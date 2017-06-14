@@ -1,0 +1,24 @@
+<paquet
+	prefix="trad_rub"
+	categorie="edition"
+	version="1.2.10"
+	etat="stable"
+	compatibilite="[3.0.10;3.1.*]"
+	logo="img_pack/Translation-icon_32.png"
+	documentation="http://contrib.spip.net/Traductions-de-rubriques-autrement-3"
+>
+
+	<nom>Traductions de rubriques autrement</nom>
+	<auteur lien="http://websimple.be">Rainer M&#252;ller</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<traduire module="tra" reference="fr" gestionnaire="salvatore" />
+	<pipeline nom="header_prive" inclure="trad_rub_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="trad_rub_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="trad_rub_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="trad_rub_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="trad_rub_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="trad_rub_pipelines.php" />
+	<necessite nom="tradrub" compatibilite="[3.1.1;[" />
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<utilise nom="taa" compatibilite="[1.0.0;[" />
+</paquet>

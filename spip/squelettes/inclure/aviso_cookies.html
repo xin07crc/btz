@@ -1,0 +1,13 @@
+<BOUCLE_seccionPadre2(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+    <BOUCLE_home(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=home}>
+        <BOUCLE_textoCookie(ARTICLES){id_rubrique}{titre_mot=cookie}>
+            <div id="overbox3" ng-show="avisoCookies">
+                <div id="infobox3">
+                    [(#TEXTE|PtoBR)]
+                        <a href="#URL_SITE" target="_blank">#NOM_SITE</a>
+                        <a ng-click="appData.aceptaCookies();" style="cursor:pointer;">#SURTITRE</a></p>
+                </div>
+            </div>
+        </BOUCLE_textoCookie>
+    </BOUCLE_home>
+</BOUCLE_seccionPadre2>

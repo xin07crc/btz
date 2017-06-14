@@ -1,0 +1,18 @@
+[(#REM) Choisis le squelettes selon la version spip, les squelettes inclus puevent être utilisé tels quels, il suffit de renommer le squelette correspondant à votre version]
+
+<BOUCLE_cond(CONDITION){si #PLUGIN{z}}>
+	<BOUCLE_principale_article(ARTICLES){id_article}>
+		<INCLURE{fond=structure}{env}{id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE}}{id_secteur=#ID_SECTEUR}{type=article}{composition=#COMPOSITION} />
+	</BOUCLE_principale_article>
+</BOUCLE_cond>
+[(#SPIP_VERSION|version_compare{2.1.99, >}|non)
+	<INCLURE{fond=article_spip2,env}/>
+	]
+[(#SPIP_VERSION|version_compare{2.1.99, >}|oui)
+	<INCLURE{fond=article_spip3,env}/>
+	]
+<//B_cond>
+
+
+
+

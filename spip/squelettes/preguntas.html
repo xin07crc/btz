@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="#ENV{lang}">
+<head>
+    <meta charset="UTF-8">
+    [(#INCLURE{fond=inclure/titulo}{idioma=#ENV{'lang'}})]
+    [(#INCLURE{fond=inclure/compartir}{id_article=#ID_RUBRIQUE})]
+    <!-- ionic/angularjs js -->
+    <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+    <!-- your app's js -->
+    <script src="test/test_ionic/www/js/angular/app.js"></script>
+    <!-- JS PROPIO -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- HUELLA DIGITAL -->
+    <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+    <!-- Libreria de angular gettext -->
+    <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="test/test_ionic/www/js/traducciones/traducciones.js"></script>
+    <!-- ANGULAR COOKIES -->
+    <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+    <!-- ANGULAR LOCALSTORAGE -->
+    <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- Libreria sweet Alert 2 -->
+    <!-- for IE support -->
+    <script src="https://cdn.jsdelivr.net/es6-promise/latest/es6-promise.auto.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/node_modules/es6-promise/dist/es6-promise.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.js"></script>
+    <link rel="stylesheet" href="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.min.css">
+    <!-- Libreria Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+    <!-- Font Awesome -->
+    <link href="test/test_ionic/www/lib/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css' />
+    <!-- -->
+    <script src="test/test_ionic/www/lib/md5/md5.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <script src="test/test_ionic/www/js/plantilla2/easyResponsiveTabs.js" type="text/javascript"></script>
+    <!-- Añadido Arraytofilter-->
+    <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+        });
+    </script>
+</head>
+<body ng-app="starter" id="preguntas" class="body-fondo-#TITRE_MOT" ng-controller="#TITRE_MOT">
+<!-- test/test_ionic/www/img/seccion/   -->
+<!----start-header---->
+<div class="wrapper">
+    <!-- MENU -->
+    [(#INCLURE{fond=inclure/menu_preguntas}{id_rubrique=#ID_RUBRIQUE})]
+    <!-- CONTAINER IMAGEN + TEXTO -->
+    <div class="main contenedor-titulo">
+        <div class="contenedor-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 contenedor-main-titulo">
+                        <div class="container-fluid">
+                            <div id="contenedor-texto-imagen-cabecera-movil" class="row">
+                                <BOUCLE_conseguirTitulo_cabecera_movil(RUBRIQUES){id_rubrique}>
+                                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 imagen-titulo-div">
+                                        [(#LOGO_RUBRIQUE ||inserer_attribut{class,imagen-titulo})]
+                                    </div>
+                                    <div style="margin-top: 1%;" class="col-xs-12 col-sm-10 col-md-10 col-lg-10 contendor-titulo-pregunta">
+                                        <span class="titulo-main">#TITRE</span>
+                                    </div>
+                                </BOUCLE_conseguirTitulo_cabecera_movil>
+                            </div>
+                            <div id="contenedor-texto-imagen-cabecera-pc" class="row">
+                                <BOUCLE_conseguirTitulo_cabecera_pc(RUBRIQUES){id_rubrique}>
+                                    <div style="text-align: left" class="sub-titulo-main">
+                                        [(#LOGO_RUBRIQUE ||inserer_attribut{class,imagen-titulo}||inserer_attribut{alt, #TITRE}||inserer_attribut{title, #TITRE})]
+                                        <span class="titulo-main">#TITRE</span>
+                                    </div>
+                                </BOUCLE_conseguirTitulo_cabecera_pc>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contenedor-main-imagen-texto">
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+
+
+                            [(#ENV{lang}|=={es}|oui)
+                                #SET{COMPARTIR_URL, http://testdeprivacidad.com/spip/#SELF}
+                                #SET{COMPARTIR_ARTICULO, http://testdeprivacidad.com/spip/IMG/arton}
+                            ]
+
+                            <BOUCLE_conseguirDefinicion2(ARTICLES){id_rubrique}{titre_mot=Definicion}>
+                                <!--<img class="imagen-titulo-definicion" src="test/test_ionic/www/img/seccion/internet-security.jpg" alt="">-->
+                                <div>
+                                    [(#LOGO_ARTICLE ||inserer_attribut{class,imagen-titulo-definicion})]
+                                </div>
+                                <div style="text-align: center; margin-top: 7%; margin-bottom: 5%;">
+                                    <a title="Compartir en Facebook" href="http://www.facebook.com/sharer.php?s=100;p[url]=#GET{COMPARTIR_URL};p[title]=Test de privacidad;p[images][0]=http://testdeprivacidad.com/test/test_ionic/www/img/fondos/fb_testdeprivacidad.jpg;p[summary]=A ver que sale...." target="_blank"><img class="imagen-footer imagen-footer-rss" src="test/test_ionic/www/img/footer/facebook.svg" alt=""></a>
+                                    <a class='twitter-share-button' data-count='vertical' data-lang='es' data-via='BloggerAyudaCom' expr:data-text='data:post.title' expr:data-url='data:post.canonicalUrl' href='http://twitter.com/share'><img class="imagen-footer imagen-footer-rss" src="test/test_ionic/www/img/footer/twitter.svg" alt=""></a>
+                                </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-8 contenedor-main-texto">
+                                #TEXTE
+                            </BOUCLE_conseguirDefinicion2>
+                        </div>
+                    </div>
+                    <div class="contenedor-mas-informacion">
+                        <!--
+                        <div id="mas_informacion_movil" ng-click="mostrar_informacion()">
+                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                <img class="imagen-main-mas" src="test/test_ionic/www/img/seccion/mas.svg">
+                            </div>
+                            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                                <BOUCLE_conseguirTitulo_movil(RUBRIQUES){id_rubrique}>
+                                    <h1>djaslkdjsalkd</h1>
+                                    [(#NOM_SITE|oui)
+                                    <a target="_blank" href="#URL_SITE" style="color: #47b24f;text-decoration: none">
+                                        <span>#NOM_SITE</span>
+                                    </a>
+                                    ]
+                                    [(#NOM_SITE|non)
+                                    <div ng-hide="quien" ng-click="mostrar_informacion('#TITRE', '#SOUSTITRE')">
+                                        <span ng-hide="datos_mas">#SOUSTITRE</span>
+                                        <span ng-show="datos_mas">#SOUSTITRE</span>
+                                        <span ng-show="datos_mas">{{ datos_mas }}</span>
+                                        <span ng-show="datos_mas_dos">/ {{ datos_mas_dos }}</span>
+                                    </div>
+                                    <div ng-show="quien">
+                                        <form ng-hide="enviado" ng-submit="quienRastrea(form)" name="form">
+                                            <p>#SOUSTITRE</p>
+                                            <input required style="color: black" type="text" name="url" ng-model="url" value="http://" ng-class="{error_form : form.$valid == false}">
+                                            <input style="color: black" type="submit" value="Enviar">
+                                        </form>
+                                        <img ng-show="enviado" src="test/test_ionic/www/img/mensajes/cargando.gif" alt="loading">
+                                    </div>
+                                    ]
+                                </BOUCLE_conseguirTitulo_movil>
+                            </div>
+                        </div>
+                        -->
+                        <BOUCLE_conseguirTitulo_pc(ARTICLES){id_rubrique}{titre_mot=Definicion}>
+                            <div id="">
+                                <div class="sub-titulo-main">
+                                    [(#NOM_SITE|oui)
+                                        <a target="_blank" href="#URL_SITE" style="color: #47b24f;text-decoration: none">
+                                            <img class="imagen-main-mas" src="test/test_ionic/www/img/seccion/mas.svg">
+                                            <span>#NOM_SITE</span>
+                                        </a>
+                                    ]
+                                    [(#NOM_SITE|non)
+                                        <div ng-hide="quien||cookiesMuestra" ng-click="mostrar_informacion('#TITRE', '#SOUSTITRE')">
+                                            <img class="imagen-main-mas" src="test/test_ionic/www/img/seccion/mas.svg">
+                                            <span ng-hide="datos_mas">#SOUSTITRE</span>
+                                            <span ng-show="datos_mas">#SOUSTITRE</span>
+                                            <span ng-show="datos_mas">{{ datos_mas }}</span>
+                                            <span ng-show="datos_mas_dos">/ {{ datos_mas_dos }}</span>
+                                        </div>
+                                        <div ng-show="quien">
+                                            <form ng-hide="enviado" ng-submit="quienRastrea(form, #ID_RUBRIQUE)" name="form">
+                                                <p>#SOUSTITRE</p>
+                                                <input required style="color: black" type="text" name="url" ng-model="url" value="">
+                                                <input style="color: black" type="submit" value="Enviar">
+                                            </form>
+                                            <img ng-show="enviado" src="test/test_ionic/www/img/mensajes/cargando.gif" alt="loading">
+                                            #PS
+                                        </div>
+                                        <div ng-show="cookiesMuestra">
+                                            <form ng-hide="enviado" ng-submit="quienCookies(form)" name="form">
+                                                <p>#SOUSTITRE</p>
+                                                <input required style="color: black" type="text" name="url" ng-model="url" value="http://" ng-class="{error_form : form.$valid == false}">
+                                                <input style="color: black" type="submit" value="Enviar">
+                                            </form>
+                                        </div>
+                                    ]
+                                </div>
+                            </div>
+                        </BOUCLE_conseguirTitulo_pc>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CONTAINER ACCIONES Y INFORMACION -->
+    <div class="main contenedor-acciones">
+        <div class="contenedor-acciones-preguntas">
+            <div class="container-fluid">
+                <div class="row">
+                    <BOUCLE_conseguirSeccionInfo(RUBRIQUES){id_rubrique}>
+                        <BOUCLE_conseguirInformacion(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=informacion}>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 informacion">
+                                <p class="titulo-informacion"><img class="titulo-informacion-imagen" src="test/test_ionic/www/img/seccion/info.svg">#TITRE</p>
+                                <ul id="lista_preguntas">
+                                    <BOUCLE_conseguirInfo(ARTICLES){id_rubrique}>
+                                        <li><p class="titulo-pregunta" onclick="abrir_pregunta('#TITRE', #COMPTEUR_BOUCLE, #ID_RUBRIQUE)">#TITRE</p></li>
+                                        <div ng-hide="true" id="pregunta-#COMPTEUR_BOUCLE">#TEXTE</div>
+                                    </BOUCLE_conseguirInfo>
+                                </ul>
+                            </div>
+                        </BOUCLE_conseguirInformacion>
+                    </BOUCLE_conseguirSeccionInfo>
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 acciones">
+                        <BOUCLE_botonInstalar(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=instalar}>
+                            <p class="titulo-acciones"><img class="titulo-acciones-imagen" src="test/test_ionic/www/img/seccion/acciones.svg">#TITRE</p>
+                            <!--<p class="texto-acciones">Lorem</p>-->
+                            <div class="contenedor-main-acciones col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div style="width: 100%;float: left; margin-bottom: 1%" class="contenedor-acciones-individuales">
+                                    <BOUCLE_conseguirBotones_URL(ARTICLES){id_rubrique}{titre_mot=url}>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="text-align: right">
+                                            <a href="#URL_SITE" target="_blank">
+                                                [(#LOGO_ARTICLE ||inserer_attribut{alt, #TITRE} ||inserer_attribut{class, enlace-boton} ||inserer_attribut{title, #TITRE})]
+                                            </a>
+                                        </div>
+                                        <div class="texto-acciones-acciones col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                            <a target="_blank" href="#URL_SITE">#NOM_SITE</a>
+                                        </div>
+                                    </BOUCLE_conseguirBotones_URL>
+
+                                </div>
+                                <BOUCLE_conseguirBotones_nourl(ARTICLES){id_rubrique}{titre_mot!=url}>
+                                    <div style="width: 100%;float: left; margin-bottom: 1%" class="contenedor-acciones-individuales" ng-click="#NOM_SITE(#COMPTEUR_BOUCLE)">
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="text-align: right" >
+                                            <a href="#" >
+                                                [(#LOGO_ARTICLE ||inserer_attribut{alt, #TITRE} ||inserer_attribut{class, enlace-boton} ||inserer_attribut{title, #TITRE})]
+                                            </a>
+                                            <div id="titulo-acciones-#COMPTEUR_BOUCLE" ng-hide="true">
+                                                #TITRE
+                                            </div>
+                                            <div id="texto-acciones-#COMPTEUR_BOUCLE" ng-hide="true">
+                                                #TEXTE
+                                            </div>
+                                            <div id="sub-acciones-#COMPTEUR_BOUCLE" ng-hide="true">
+                                                #SOUSTITRE
+                                            </div>
+                                        </div>
+                                        <div class="texto-acciones-acciones col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                            <a target="_blank" href="#URL_SITE">#TITRE</a>
+                                        </div>
+                                    </div>
+                                </BOUCLE_conseguirBotones_nourl>
+                            </div>
+                        </BOUCLE_botonInstalar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PIE -->
+    [(#INCLURE{fond=inclure/pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+    [(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+[(#ENV{lang}|=={es}|oui)
+    #SET{id_rubrique, 8}
+]
+[(#ENV{lang}|=={en}|oui)
+    #SET{id_rubrique, 9}
+]
+<BOUCLE_seccionPadre(RUBRIQUES){id_parent=#GET{id_rubrique}>
+    <BOUCLE_seccionPreguntas(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par titre}>
+        <BOUCLES_conseguirAcciones(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+            <h3>#TITRE</h3>
+            <BOUCLE_dentroAcciones(ARTICLES){id_rubrique}>
+                <p style="color: seagreen">#TITRE</p>
+                <p>#TEXTE</p>
+            </BOUCLE_dentroAcciones>
+            <BOUCLE_verAcciones(RUBRIQUES){titre_mot=informacion}{id_parent=#ID_RUBRIQUE}>
+                <br>
+                <h4 style="color: #0055cc">#TITRE</h4>
+                <BOUCLE_articuloAcciones(ARTICLES){id_rubrique=#ID_RUBRIQUE}>
+                    <br>
+                    <h4 style="color: #3c763d">#TITRE</h4>
+                    <p>#TEXTE</p>
+                    <br>
+                </BOUCLE_articuloAcciones>
+            </BOUCLE_verAcciones>
+            <BOUCLE_n(RUBRIQUES){titre_mot=instalar}{id_parent=#ID_RUBRIQUE}>
+                <br>
+                <h4 style="color: #0055cc">#TITRE</h4>
+                <BOUCLE_nArticles(ARTICLES){id_rubrique=#ID_RUBRIQUE}>
+                    <br>
+                    <h4 style="color: #3c763d">#TITRE</h4>
+                    <p>#TEXTE</p>
+                    <br>
+                </BOUCLE_nArticles>
+            </BOUCLE_n>
+        </BOUCLES_conseguirAcciones>
+    </ul>
+    </BOUCLE_seccionPreguntas>
+    <BOUCLE_Articulos(ARTICLES){id_rubrique}>
+        <h3>#TITRE</h3>
+        #TEXTE
+    </BOUCLE_Articulos>
+</BOUCLE_seccionPadre>

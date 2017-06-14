@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  [(#INCLURE{fond=inclure/titulo}{idioma=#GLOBALS{'idioma'}})]
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/fb_testdeprivacidad.jpg" />
+  <meta property="og:title" content="Test de privacidad" />
+  <meta property="og:description" content="¿Porque es importante tu privacidad?" />
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@typ" />
+  <meta name="twitter:title" content="Test de privacidad" />
+  <meta name="twitter:description" content="¿Porque es importante tu privacidad?" />
+  <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/twitter_testyourprivacy.jpg" />
+  <!-- TWITTER/FIN -->
+
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/normalize.css">
+  <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/webflow.css">
+  <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/elpis.webflow.css">
+  <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/custom/style.css">
+  <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+  <!-- BOOTSTRAP -->
+  <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+  <!-- Custom Theme files -->
+  <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- JS PROPIO -->
+  <script src="test/test_ionic/www/js/custom/js.js"></script>
+  <!-- Huella digital -->
+  <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+  <!-- ionic/angularjs js -->
+  <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+  <!-- Controladores -->
+  <script src="test/test_ionic/www/js/angular/app.js"></script>
+  <!-- ANGULAR COOKIES -->
+  <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+  <!-- ANGULAR LOCALSTORAGE -->
+  <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <!-- JQUERY CUSTOM -->
+  <script src="test/test_ionic/www/js/custom/js.js"></script>
+  <!-- Libreria de angular gettext -->
+  <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+  <script src="test/test_ionic/www/js/traducciones/traducciones.js"></script>
+  <!-- Añadido Arraytofilter-->
+  <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+<!--
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Josefin Slab:100,100italic,300,300italic,regular,italic,600,600italic,700,700italic","Work Sans:100,200,300,regular,500,600,700,800,900:latin,latin-ext","Poppins:300,regular,500,600,700:latin,devanagari,latin-ext"]
+      }
+    });
+  </script>
+  -->
+  <script type="text/javascript" src="test/test_ionic/www/js/plantilla/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
+  <link rel="apple-touch-icon" href="images/fav mob.png">
+</head>
+<body id="slider-home" ng-app="starter" ng-controller="home">
+  <div id="home-top" data-ix="fix-nav-trigger" class="top-section-for-nav-to-show"></div>
+  <!-- CABECERA -->
+  [(#INCLURE{fond=inclure/menu_preguntas}{id_rubrique=#ID_RUBRIQUE})]
+  <!-- CONTENIDO -->
+  <div data-animation="cross" data-duration="500" data-infinite="1" data-nav-spacing="10" data-easing="ease-in-out-cubic" data-delay="8000" data-autoplay="1" class="w-slider hero-slider">
+    <div class="w-slider-mask">
+      <!-- AQUI COMIENZA EL SLIDER -->
+      <!-- Bucle que saca la seccion padre en el idioma actual -->
+      <BOUCLE_seccionPadre(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+      <!-- Bucle que saca el hijo de la primera seccion en el idioma actual -->
+      <BOUCLE_seccionPreguntas(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}>
+      <!-- Saca las preguntas en el idioma actual -->
+        <BOUCLE_listadoPreguntas(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}>
+        <div class="w-slide hero-slider-slide slider-hero-#COMPTEUR_BOUCLE">
+          <div class="sec-in-slider">
+            <div class="max-width-section extra-padding-20">
+              <div style="font-family: bariol_serif_regular_italic;" data-ix="hero-slider-2" class="hero-slider-text-2">#TITRE</div>
+              <a href="[(#TEXTE|PtoBR)]">
+                  <img data-ix="hero-slider-3" class="imagen-main-mas w-inline-block hero-scroll-box" src="test/test_ionic/www/img/seccion/mas_blanco.svg">
+              </a>
+            </div>
+          </div>
+        </div>
+        </a>
+        </BOUCLE_listadoPreguntas>
+      </BOUCLE_seccionPreguntas>
+      </BOUCLE_seccionPadre>
+    </div>
+    <div class="w-slider-nav w-round hero-slider-bulets"></div>
+  </div>
+  [(#INCLURE{fond=inclure/pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+  [(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+  <script type="text/javascript" src="test/test_ionic/www/js/plantilla/webflow.js"></script>
+  <!--
+	<script type="text/javascript" src="https://d3e54v103j8qbb.cloudfront.net/js/webflow-template.5f4b27e6ec.js"></script>
+  <!--[if lte IE 9]>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

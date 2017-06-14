@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_demo">
+    [<p style="width: 450px;" class='success'>(#ENV*{message_ok})</p>]
+    [<p style="width: 450px;" class='error'>(#ENV*{message_erreur})</p>]
+    [(#ENV*{message_ok}|non)
+    <form action="#ENV{action}" enctype="multipart/form-data" method="POST" name="form">
+        <div>
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <div style="" class="col-sm-12 col-md-12 col-lg-12">
+                <p style="width: 500px; margin-left: -169px; text-align: center">
+                    Type the SMS code that we sent to your mobile phone
+                </p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <p class="input-block">
+                    <label class="label-codigo" for="codigo"><strong>#SURTITRE</strong></label>
+                    <input class="ancho2" style="max-width: 98px;" type="text" name="codigo" value="#ENV{'codigo'}" id="codigo" required>
+                </p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <p class="boutons"><input style="max-width: 98px; margin-top: 24px;" id="submit-registro" type="submit" class="submit" value="Send" /></p>
+            </div>
+        </div>
+    </form>
+    ]
+</div>

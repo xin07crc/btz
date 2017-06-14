@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_demo">
+    [<p class='success'>(#ENV*{message_ok})</p>]
+    [<p class='error'>(#ENV*{message_erreur})</p>]
+
+    <BOUCLE_seccionPadre1(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+    <BOUCLE_conseguirEmail(RUBRIQUES){id_mot=37}{id_parent=#ID_RUBRIQUE}>
+    <BOUCLE_conseguirArticleEmail(ARTICLES){titre like emailLoginReto}{id_rubrique=#ID_RUBRIQUE}>
+    #SET{'id_article', #ID_ARTICLE}
+    </BOUCLE_conseguirArticleEmail>
+    </BOUCLE_conseguirEmail>
+    </BOUCLE_seccionPadre1>
+
+
+    <BOUCLE_seccionPadre(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+    <BOUCLE_conseguirForm(RUBRIQUES){id_mot=30}{id_parent=#ID_RUBRIQUE}>
+    <BOUCLE_conseguirArticle(ARTICLES){titre like %loginReto%}{id_rubrique=#ID_RUBRIQUE}>
+        [(#ENV*{message_ok}|non)
+        <form action="?page=new_loginreto" enctype="multipart/form-data" method="POST" name="form"><div>
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <span class="titulo-main">#NOM_SITE</span>
+            <div style="margin-bottom: 20px;" class="col-sm-12 col-md-12 col-lg-12">
+                #TEXTE
+            </div>
+            <div style="max-width: 340px; margin-left: auto; margin-right: auto">
+                <!-- EMAIL -->
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <p class="input-block">
+                        <label class="label-candidatura" for="email"><strong>Phone/Email</strong></label>
+                        <input style="width: 100%" class="ancho2" type="text" name="email" value="#ENV{'email'}" id="email" required>
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 10px">
+                    <p class="boutons"><input id="submit-registro" type="submit" class="submit" value="#SOUSTITRE" /></p>
+                </div>
+                <!-- CAMPO HIDDEN DE ID DEL ARTICULO PARA EL EMAIL -->
+                <input type="hidden" name="id_email" value="#GET{'id_article'}">
+            </div>
+
+        </div>
+
+        </form>
+        ]
+    </BOUCLE_conseguirArticle>
+    </BOUCLE_conseguirForm>
+    </BOUCLE_seccionPadre>
+
+    [(#ENV*{message_ok}|oui)
+    <div class="col-sm-12 col-md-4 col-lg-4" style="margin-top: 10px">
+        <p class="boutons"><a href="?page=betatester">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </a></p>
+    </div>
+    ]
+</div>

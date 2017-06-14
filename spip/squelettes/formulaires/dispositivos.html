@@ -1,0 +1,111 @@
+<div class="formulaire_spip formulaire_demo">
+    [<p class='success'>(#ENV*{message_ok})</p>]
+    [<p class='error'>(#ENV*{message_erreur})</p>]
+    <form action="index.php?page=btz_dispositivos" enctype="multipart/form-data" method="POST" name="form" novalidate>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <p class="titulo-dispositivos"  class="titulo-dispositivos" translate>Tablet</p>
+        <p class="tipo-dispositivo">iOS</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupoTabletios(MOTS){id_groupe=10}>
+                <li>
+                    <input class="checkbox-dispositivos" id="tiosid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_tios_#ID_MOT" value="#ID_MOT">
+                    <label for="tiosid-#COMPTEUR_BOUCLE">#TITRE</label>
+                </li>
+            </BOUCLE_conseguirGrupoTabletios>
+        </ul>
+        <p class="tipo-dispositivo">Android</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupoTabletandroid(MOTS){id_groupe=9}>
+            <li>
+                <input class="checkbox-dispositivos" id="tandroid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_tandroid_#ID_MOT" value="#ID_MOT">
+                <label for="tandroid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupoTabletandroid>
+        </ul>
+        <p class="tipo-dispositivo">Windows</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupoTabletwin(MOTS){id_groupe=11}>
+            <li>
+                <input class="checkbox-dispositivos" id="twinid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_twinid_#ID_MOT" value="#ID_MOT">
+                <label for="twinid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupoTabletwin>
+        </ul>
+        <p  class="titulo-dispositivos" translate>Ordenador</p>
+        <p class="tipo-dispositivo">macOS</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirOrdenadormac(MOTS){id_groupe=14}>
+            <li>
+                <input class="checkbox-dispositivos" id="omacid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_omacid_#ID_MOT" value="#ID_MOT">
+                <label for="omacid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirOrdenadormac>
+        </ul>
+        <p class="tipo-dispositivo">Windows</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupoOrdenadorWin(MOTS){id_groupe=12}>
+            <li>
+                <input class="checkbox-dispositivos" id="owinid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_owinid_#ID_MOT" value="#ID_MOT">
+                <label for="owinid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupoOrdenadorWin>
+        </ul>
+        <p class="tipo-dispositivo">Linux</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupoOrdenadorLinux(MOTS){id_groupe=13}>
+            <li>
+                <input class="checkbox-dispositivos" id="olinuxid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_olinuxid_#ID_MOT" value="#ID_MOT">
+                <label for="olinuxid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupoOrdenadorLinux>
+        </ul>
+        <!-- Moviles -->
+        <p  class="titulo-dispositivos" translate>Móvil</p>
+        <p class="tipo-dispositivo">iOS</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupomovilios(MOTS){id_groupe=15}>
+            <li>
+                <input class="checkbox-dispositivos" id="miosid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_miosid_#ID_MOT" value="#ID_MOT">
+                <label for="miosid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupomovilios>
+        </ul>
+        <p class="tipo-dispositivo">Android</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupomovilandroid(MOTS){id_groupe=16}>
+            <li>
+                <input class="checkbox-dispositivos" id="mandroidid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_mandroidid_#ID_MOT" value="#ID_MOT">
+                <label for="mandroidid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupomovilandroid>
+        </ul>
+        <p class="tipo-dispositivo">Windows Phone</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupomovilwinphone(MOTS){id_groupe=17}>
+            <li>
+                <input class="checkbox-dispositivos" id="mwinphoneid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_mwinphoneid_#ID_MOT" value="#ID_MOT">
+                <label for="mwinphoneid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupomovilwinphone>
+        </ul>
+        <p class="tipo-dispositivo">Blackberry</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupomovilblackberry(MOTS){id_groupe=17}>
+            <li>
+                <input class="checkbox-dispositivos" id="mblackid-#COMPTEUR_BOUCLE" type="checkbox" name="disp_mblackid_#ID_MOT" value="#ID_MOT">
+                <label for="mblackid-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupomovilblackberry>
+        </ul>
+        <p class="tipo-dispositivo">Windows Mobile</p>
+        <ul class="lista-dispositivos">
+            <BOUCLE_conseguirGrupomovilwinmobile(MOTS){id_groupe=17}>
+            <li>
+                <input class="checkbox-dispositivos" id="mwinmobile-#COMPTEUR_BOUCLE" type="checkbox" name="disp_mwinmobile_#ID_MOT" value="#ID_MOT">
+                <label for="mwinmobile-#COMPTEUR_BOUCLE">#TITRE</label>
+            </li>
+            </BOUCLE_conseguirGrupomovilwinmobile>
+        </ul>
+        <input style="margin-top: 25px;width: 138px;" class="form-control" type="submit" value="{{'Enviar'|translate}}">
+    </form>
+</div>

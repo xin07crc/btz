@@ -1,0 +1,351 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: squelettes/btz_puntos.html:226
+msgid "Adquirir"
+msgstr ""
+
+#: squelettes/btz_perfil.html:343
+#: squelettes/btz_perfil.html:371
+#: squelettes/formulaires/perfil.html:43
+#: squelettes/formulaires/perfil.html:54
+msgid "Aleman"
+msgstr ""
+
+#: trackers/index.html:1568
+msgid "Análisis de sitios web"
+msgstr ""
+
+#: squelettes/btz_perfil.html:452
+#: squelettes/btz_perfil.html:464
+#: squelettes/formulaires/perfil.html:79
+msgid "Años de vida laboral"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:73
+msgid "BETATESTER"
+msgstr ""
+
+#: trackers/index.html:44
+#: trackers/index.html:45
+msgid "Buscar"
+msgstr ""
+
+#: trackers/index.html:51
+msgid "Busqueda"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:66
+msgid "COMO FUNCIONA"
+msgstr ""
+
+#: squelettes/btz_perfil.html:267
+#: squelettes/btz_perfil.html:293
+#: squelettes/btz_perfil.html:320
+#: squelettes/btz_perfil.html:348
+#: squelettes/btz_perfil.html:376
+#: squelettes/btz_perfil.html:398
+#: squelettes/btz_perfil.html:425
+#: squelettes/btz_perfil.html:448
+#: squelettes/btz_perfil.html:470
+msgid "Cancelar"
+msgstr ""
+
+#: squelettes/btz_perfil.html:380
+#: squelettes/btz_perfil.html:392
+#: squelettes/formulaires/perfil.html:58
+msgid "Codigo postal"
+msgstr ""
+
+#: squelettes/betatester.html:166
+#: squelettes/btz_historial.html:179
+#: squelettes/btz_realizadas.html:181
+msgid "Comentar"
+msgstr ""
+
+#: trackers/index.html:2516
+msgid "Comentarios"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_usuario.html:22
+#: squelettes/inclure/btz_menu_usuario.html:24
+msgid "Conectarse"
+msgstr ""
+
+#: squelettes/btz_perfil.html:475
+msgid "Crear"
+msgstr ""
+
+#: squelettes/btz_perfil.html:491
+msgid "Datos del usuario"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_usuario.html:14
+#: squelettes/inclure/btz_menu_usuario.html:16
+#: squelettes/inclure/new_menu_superior.html:56
+msgid "Desconectar"
+msgstr ""
+
+#: squelettes/btz_perfil.html:483
+msgid "Dispositivos"
+msgstr ""
+
+#: squelettes/btz_perfil.html:249
+#: squelettes/btz_perfil.html:261
+#: squelettes/formulaires/perfil.html:11
+msgid "Edad"
+msgstr ""
+
+#: squelettes/formulaires/dispositivos.html:108
+#: squelettes/formulaires/perfil.html:84
+msgid "Enviar"
+msgstr ""
+
+#: trackers/index.html:2387
+msgid "Esencial"
+msgstr ""
+
+#: squelettes/btz_perfil.html:313
+#: squelettes/formulaires/perfil.html:21
+msgid "España"
+msgstr ""
+
+#: squelettes/btz_perfil.html:340
+#: squelettes/btz_perfil.html:368
+#: squelettes/formulaires/perfil.html:40
+#: squelettes/formulaires/perfil.html:51
+msgid "Español"
+msgstr ""
+
+#: squelettes/btz_perfil.html:342
+#: squelettes/btz_perfil.html:370
+#: squelettes/formulaires/perfil.html:42
+#: squelettes/formulaires/perfil.html:53
+msgid "Frances"
+msgstr ""
+
+#: squelettes/btz_perfil.html:314
+#: squelettes/formulaires/perfil.html:22
+msgid "Francia"
+msgstr ""
+
+#: squelettes/btz_perfil.html:271
+#: squelettes/btz_perfil.html:283
+#: squelettes/formulaires/perfil.html:27
+#: squelettes/formulaires/perfil.html:30
+msgid "Genero"
+msgstr ""
+
+#: squelettes/btz_perfil.html:266
+#: squelettes/btz_perfil.html:292
+#: squelettes/btz_perfil.html:319
+#: squelettes/btz_perfil.html:347
+#: squelettes/btz_perfil.html:375
+#: squelettes/btz_perfil.html:397
+#: squelettes/btz_perfil.html:424
+#: squelettes/btz_perfil.html:447
+#: squelettes/btz_perfil.html:469
+msgid "Guardar"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:31
+msgid "HISTORICO"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_privado.html:5
+msgid "Historico"
+msgstr ""
+
+#: squelettes/btz_perfil.html:287
+#: squelettes/formulaires/perfil.html:31
+msgid "Hombre"
+msgstr ""
+
+#: squelettes/btz_perfil.html:341
+#: squelettes/btz_perfil.html:369
+#: squelettes/formulaires/perfil.html:41
+#: squelettes/formulaires/perfil.html:52
+msgid "Ingles"
+msgstr ""
+
+#: trackers/index.html:2059
+msgid "Interacción con el cliente"
+msgstr ""
+
+#: squelettes/betatester.html:150
+#: squelettes/betatester.html:156
+#: squelettes/betatester.html:157
+#: squelettes/btz_realizadas.html:164
+#: squelettes/btz_realizadas.html:171
+#: squelettes/btz_realizadas.html:172
+msgid "Ir a tarea"
+msgstr ""
+
+#: squelettes/btz_perfil.html:324
+#: squelettes/btz_perfil.html:336
+#: squelettes/btz_perfil.html:339
+#: squelettes/formulaires/perfil.html:36
+#: squelettes/formulaires/perfil.html:39
+msgid "Lengua materna"
+msgstr ""
+
+#: trackers/index.html:39
+msgid "Listado de Trackers/Rastreadores"
+msgstr ""
+
+#: squelettes/betatester.html:160
+#: squelettes/betatester.html:163
+#: squelettes/btz_historial.html:173
+#: squelettes/btz_historial.html:176
+#: squelettes/btz_realizadas.html:175
+#: squelettes/btz_realizadas.html:178
+msgid "Mas información"
+msgstr ""
+
+#: squelettes/btz_perfil.html:288
+#: squelettes/formulaires/perfil.html:32
+msgid "Mujer"
+msgstr ""
+
+#: squelettes/formulaires/dispositivos.html:62
+msgid "Móvil"
+msgstr ""
+
+#: squelettes/btz_perfil.html:402
+#: squelettes/btz_perfil.html:414
+#: squelettes/btz_perfil.html:417
+#: squelettes/formulaires/perfil.html:63
+#: squelettes/formulaires/perfil.html:66
+msgid "Nivel de estudios"
+msgstr ""
+
+#: squelettes/btz_perfil.html:505
+msgid "No estas Conectado"
+msgstr ""
+
+#: squelettes/formulaires/dispositivos.html:33
+msgid "Ordenador"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:24
+msgid "PERFIL"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:38
+msgid "PREMIOS"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:80
+msgid "PROYECTOS"
+msgstr ""
+
+#: squelettes/btz_perfil.html:297
+#: squelettes/btz_perfil.html:309
+#: squelettes/btz_perfil.html:312
+#: squelettes/formulaires/perfil.html:17
+#: squelettes/formulaires/perfil.html:20
+msgid "Pais"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_privado.html:4
+msgid "Perfil"
+msgstr ""
+
+#: squelettes/btz_perfil.html:418
+#: squelettes/formulaires/perfil.html:67
+msgid "Primaria"
+msgstr ""
+
+#: trackers/index.html:63
+msgid "Publicidad"
+msgstr ""
+
+#: trackers/index.html:2489
+msgid "Publicidad para adultos"
+msgstr ""
+
+#: squelettes/betatester.html:168
+#: squelettes/btz_historial.html:139
+#: squelettes/btz_historial.html:181
+#: squelettes/btz_puntos.html:202
+#: squelettes/btz_puntos.html:229
+#: squelettes/btz_realizadas.html:183
+msgid "Puntos"
+msgstr ""
+
+#: trackers/index.html:2288
+msgid "Redes sociales"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_usuario.html:28
+#: squelettes/inclure/btz_menu_usuario.html:30
+#: squelettes/inclure/new_menu_superior.html:53
+msgid "Registrarse"
+msgstr ""
+
+#: squelettes/btz_perfil.html:315
+#: squelettes/formulaires/perfil.html:23
+msgid "Reino Unido"
+msgstr ""
+
+#: trackers/index.html:2440
+msgid "Reproducción de audio o vídeo"
+msgstr ""
+
+#: squelettes/btz_perfil.html:419
+#: squelettes/formulaires/perfil.html:68
+msgid "Secundaria"
+msgstr ""
+
+#: squelettes/btz_perfil.html:352
+#: squelettes/btz_perfil.html:364
+#: squelettes/btz_perfil.html:367
+#: squelettes/formulaires/perfil.html:47
+#: squelettes/formulaires/perfil.html:50
+msgid "Segundo idioma"
+msgstr ""
+
+#: squelettes/btz_perfil.html:242
+#: squelettes/formulaires/perfil.html:8
+msgid "Socio-demográfico"
+msgstr ""
+
+#: squelettes/inclure/new_menu_superior.html:17
+msgid "TAREAS"
+msgstr ""
+
+#: squelettes/formulaires/dispositivos.html:5
+msgid "Tablet"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_privado.html:3
+msgid "Tareas"
+msgstr ""
+
+#: trackers/index.html:46
+msgid "Todos"
+msgstr ""
+
+#: squelettes/btz_perfil.html:494
+msgid "Token de usuario"
+msgstr ""
+
+#: squelettes/btz_perfil.html:429
+#: squelettes/btz_perfil.html:441
+#: squelettes/formulaires/perfil.html:73
+msgid "Trabaja"
+msgstr ""
+
+#: squelettes/btz_perfil.html:420
+#: squelettes/formulaires/perfil.html:69
+msgid "Universitarios"
+msgstr ""
+
+#: squelettes/inclure/btz_menu_usuario.html:10
+#: squelettes/inclure/new_menu_superior.html:44
+#: squelettes/inclure/new_menu_superior.html:86
+msgid "Usuario"
+msgstr ""

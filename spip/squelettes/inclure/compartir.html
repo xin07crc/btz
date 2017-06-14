@@ -1,0 +1,26 @@
+<BOUCLE_seccionPadre3(RUBRIQUES){lang=#ENV{lang}}{par titre}{id_parent=0}>
+    <BOUCLE_seccionTituloWeb3(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=home}>
+        <BOUCLE_articuloTituloWeb3(ARTICLES){id_rubrique}{titre_mot=titulo_web}>
+        <!-- FACEBOOK -->
+        [(#ENV{lang}|=={es}|oui)
+        ]
+        [(#ENV{lang}|=={en}|oui)
+        ]
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@typ" />
+        <!-- TWITTER -->
+        </BOUCLE_articuloTituloWeb3>
+    </BOUCLE_seccionTituloWeb3>
+</BOUCLE_seccionPadre3>
+<BOUCLE_conseguirDescripcion(ARTICLES){id_rubrique=#ID_ARTICLE}>
+    <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/fb_testdeprivacidad.jpg" />
+    <meta property="og:description" content="[(#DESCRIPTIF|PtoBR)]" />
+    <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/twitter_testyourprivacy.jpg" />
+    <meta name="twitter:description" content="[(#DESCRIPTIF|PtoBR)]" />
+</BOUCLE_conseguirDescripcion>
+<BOUCLE_conseguirTitulo(RUBRIQUES){id_rubrique=#ID_ARTICLE}>
+    <meta property="og:title" content="[(#TITRE|PtoBR)]" />
+    <meta name="twitter:title" content="[(#TITRE|PtoBR)]" />
+</BOUCLE_conseguirTitulo>
+

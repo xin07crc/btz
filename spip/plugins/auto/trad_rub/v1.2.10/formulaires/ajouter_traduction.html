@@ -1,0 +1,14 @@
+<div class="formulaire_spip formulaire_ajouter_traduction">
+	<form action="#ENV{action}" method="post">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				[(#SAISIE{selecteur_rubrique,rubriques_menu,
+				multiple='',
+		label=<:tra:ajouter_traduction:>})] 
+			</ul>
+			<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+		</div>
+	
+	</form>
+</div>

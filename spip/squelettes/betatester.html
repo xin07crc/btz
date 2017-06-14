@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TYP">
+    <meta name="twitter:creator" content="@TYP">
+    <meta name="twitter:title" content="Test de privacidad">
+    <meta name="twitter:description" content="¿Porque es importante tu privacidad?">
+    <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg">
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="http://testdeprivacidad.com/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Test de privacidad" />
+    <meta property="og:description" content="¿Porque es importante tu privacidad?" />
+    <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg" />
+    <meta charset="UTF-8">
+    <title>betaCitizens</title>
+    <!-- ionic/angularjs js -->
+    <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+    <!-- your app's js -->
+    <script src="test/test_ionic/www/js/angular/app.js"></script>
+    <!-- JS PROPIO -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- HUELLA DIGITAL -->
+    <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+    <!-- Libreria de angular gettext -->
+    <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="traducciones/js/traducciones.js"></script>
+    <!-- ANGULAR COOKIES -->
+    <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+    <!-- ANGULAR LOCALSTORAGE -->
+    <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- Libreria sweet Alert 2 -->
+    <!-- for IE support -->
+    <script src="https://cdn.jsdelivr.net/es6-promise/latest/es6-promise.auto.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/node_modules/es6-promise/dist/es6-promise.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.js"></script>
+    <link rel="stylesheet" href="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.min.css">
+    <!-- Libreria Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <script src="test/test_ionic/www/js/plantilla2/easyResponsiveTabs.js" type="text/javascript"></script>
+    <!-- Añadido Arraytofilter-->
+    <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="test/test_ionic/www/lib/font-awesome/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+            var parametros = getUrlVars();
+            // Miro a ver si viene redirecionada con errores
+            if(parametros["smsterror"] && parametros["smsmerror"]) {
+                var mensaje = parametros["smsmerror"].replace(/_/g, " ");
+
+                swal({
+                    title: parametros["smsterror"],
+                    text: mensaje,
+                    animation: false,
+                    type: 'error',
+                    width: 50,
+                })
+            }
+        });
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function(m,key,value) {
+                        vars[key] = value;
+                    });
+            return vars;
+        }
+        /**
+         *
+         * @param titulo
+         * @param texto
+         */
+        function abrir_popup(titulo_env, id_texto, logo_url) {
+            var pregunta = "<div class='contenedor-mas-huella texto-normal'>";
+            var imagen = "<div style='margin-bottom: 3%;'><img style='width: 46px' src='" + logo_url + "' alt='logo'></div>";
+            var texto = document.getElementById(id_texto).innerHTML;
+            //console.log(texto);
+            pregunta += texto;
+            pregunta += "</div>";
+            var titulo = imagen;
+            titulo += titulo_env;
+            swal({
+                title: titulo,
+                text: pregunta,
+                animation: false,
+            })
+        }
+    </script>
+</head>
+<body id="internas" ng-app="starter" class="body-fondo-internas betatester" ng-controller="internas">
+<!-- test/test_ionic/www/img/seccion/   -->
+<!----start-header---->
+<div class="wrapper">
+    <!-- MENU -->
+    #CACHE{0}
+    #SET{'token', #EVAL{$_COOKIE["token"]}}
+
+    [(#INCLURE{fond=inclure/menu_preguntas_beta}{token=#GET{'token'}}{id_rubrique=#ID_RUBRIQUE})]
+    <!-- CONTAINER IMAGEN + TEXTO -->
+    <div class="main contenedor-titulo">
+        <div class="contenedor-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="container-fluid">
+                            [(#INCLURE{fond=inclure/btz_menu_usuario}{token=#GET{'token'}}{fl=#GET{'fl'}})]
+                            <BOUCLE_conseguirTitulo(RUBRIQUES){id_mot=33}{lang=#LANG}>
+                            <span class="titulo-main">#TITRE</span>
+                            <!-- Texto descriptivo -->
+                            <div style="font-style: italic" class="col-sm-12 col-md-12 col-lg-12">
+                                #TEXTE
+                            </div>
+                            </BOUCLE_conseguirTitulo>
+                            <BOUCLE_conseguirPC(MOTS){id_groupe=8}>
+                                <BOUCLE_conseguirPalabraClave(spip_mots_liens){id_mot=#ID_MOT}>
+                                    <BOUCLE_conseguirArticleRetos(ARTICLES){id_article=#ID_ARTICLE}{lang=#LANG}>
+                                        <B_sacarBotonCodigo>
+                                            <BOUCLE_sacarBotonCodigo(registroreto){si #GET{'token'}}{token=#GET{'token'}}{status=1}>
+                                                #SET{'token_url', #TOKEN_URL}
+                                            </BOUCLE_sacarBotonCodigo>
+                                        </B_sacarBotonCodigo>
+                                            #SET{'token_url', 0}
+                                        <//B_sacarBotonCodigo>
+                                        <div class="contenedor-reto col-sm-12 col-md-12 col-lg-12">
+                                        <div class="reto-contenedor-imagen col-sm-12 col-md-2 col-lg-2">
+                                            [(#LOGO_ARTICLE ||inserer_attribut{class,img-reto})]
+                                        </div>
+                                        <div class="reto-contenedor-textos col-sm-12 col-md-10 col-lg-10">
+                                            <div class="reto-contenedor-titulo col-sm-12 col-md-12 col-lg-12">
+                                                <strong><a title="{{'Ir a tarea'|translate}}" href="squelettes/redirect.php?ref=#URL_SITE&tu=#GET{'token_url'}&ia=#ID_ARTICLE">#TITRE</a></strong>
+                                            </div>
+                                            <div class="reto-contenedor-descr col-sm-12 col-md-12 col-lg-12">
+                                                #DESCRIPTIF
+                                            </div>
+                                            <div class="reto-contenedor-botones col-sm-12 col-md-12 col-lg-12">
+                                                <a title="{{'Ir a tarea'|translate}}" href="squelettes/redirect.php?ref=#URL_SITE&tu=#GET{'token_url'}&ia=#ID_ARTICLE">
+                                                    <img class="reto-imagen-pequena" src="IMG/arton159.svg" alt="Link" title="{{'Ir a tarea'|translate}}">
+                                                </a>
+                                                <a  style="margin-left: 1%" href="#" onclick="abrir_popup('[(#TITRE|PtoBR)]','texto-popup-#TITRE', '[(#LOGO_ARTICLE|extraire_attribut{src}|url_absolue)]')">
+                                                    <img class="reto-imagen-pequena" src="test/test_ionic/www/img/seccion/mas.svg" alt="mas" title="{{'Mas información'|translate}}">
+                                                </a>
+                                                <a  style="margin-left: 1%" href="#" onclick="abrir_popup('[(#TITRE|PtoBR)]','texto-priv-popup-#TITRE', '[(#LOGO_ARTICLE|extraire_attribut{src}|url_absolue)]')">
+                                                    <img class="reto-imagen-pequena" src="test/test_ionic/www/img/seccion/acciones/borrar-nuestras-cookies.svg" alt="mas" title="{{'Mas información'|translate}}">
+                                                </a>
+                                                <a  style="margin-left: 1%" href="#" onclick="comentar(#ID_ARTICLE)">
+                                                    <img class="reto-imagen-pequena" src="test/test_ionic/www/img/seccion/acciones/borrar-nuestras-cookies.svg" alt="mas" title="{{'Comentar'|translate}}">
+                                                </a>
+                                                <span style="margin-left: 1%; font-style: italic">#SOUSTITRE <span translate>Puntos</span></span>
+                                                <div style="display: none" id="texto-popup-#TITRE">
+                                                    #TEXTE
+                                                </div>
+                                                <div style="display: none" id="texto-priv-popup-#TITRE">
+                                                    #PS
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </BOUCLE_conseguirArticleRetos>
+                                </BOUCLE_conseguirPalabraClave>
+                            </BOUCLE_conseguirPC>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PIE -->
+    [(#INCLURE{fond=inclure/btz_pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+    [(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+</div>
+</body>
+</html>

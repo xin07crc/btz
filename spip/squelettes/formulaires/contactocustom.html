@@ -1,0 +1,33 @@
+<BOUCLE_seccionPadre(RUBRIQUES){lang=#ENV{lang}}{par titre}{id_parent=0}>
+    <BOUCLE_seccionPreguntas(RUBRIQUES){lang=#ENV{lang}}{par titre}{id_parent=#ID_RUBRIQUE}{titre_mot=formularios}>
+        <BOUCLE_conseguirArticulos(ARTICLES){id_rubrique=#ID_RUBRIQUE}{titre_mot=contacto}>
+            #TEXTE
+        </BOUCLE_conseguirArticulos>
+    </BOUCLE_seccionPreguntas>
+</BOUCLE_seccionPadre>
+
+[<p class='success'>(#ENV*{message_ok})</p>]
+[<p class='error'>(#ENV*{message_erreur})</p>]
+
+[(#ENV*{message_ok}|non)
+    <form action='#ENV{action}' method='post' ng-controller="formulario">
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <div class="contact-to">
+            <input placeholder="{{email}}" type='text' name='email' value='#ENV{email}' />
+            <input placeholder="{{asunto}}" type='text' name='asunto' value='#ENV{asunto}' />
+            <br />
+            <textarea id="textarea-contacto" name='message' rows="15" cols="250">#ENV{message}</textarea>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img style="float: left; width: 122px;" id="captcha" src="./test/test_ionic/www/lib/securimage/securimage_show.php" alt="CAPTCHA Image" />
+                <input type="text" name="captcha_code" size="10" maxlength="6" placeholder="Captcha"/>
+                <br>
+                <a href="#" onclick="document.getElementById('captcha').src = './test/test_ionic/www/lib/securimage/securimage_show.php?' + Math.random(); return false">
+                    <img src="./test/test_ionic/www/img/mensajes/reload.svg">
+                </a>
+                <br>
+                <br>
+            </div>
+            <input id="contacto-submit" type='submit' name='ok' value='{{enviar}}' />
+        </div>
+    </form>
+]

@@ -1,0 +1,27 @@
+<div class="onglets_traduction articles barre_onglet clearfix">
+	<ul>
+		#ONGLETS_TRADUCTION
+	</ul> 
+
+	[(#AUTORISER{modifier,article,#ID_ARTICLE})
+		[(#ENV{voir}|non)
+			<a class="bouton_options ajax" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>">
+				<img src="#CHEMIN{img_pack/Translation-icon_32.png}"/>
+			</a>
+		]
+		[(#ENV{voir}|oui)
+			<a class="bouton_options ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>">
+				<img src="#CHEMIN{img_pack/Translation-icon_32.png}"/>
+			</a>
+		]
+	]
+
+	[(#ENV{voir}|oui)
+	#OPTIONS
+		[<div class="changer"><h2><:taa:changer_langue:></h2>
+			<ul class="liste-items changer_langue">
+				(#CHANGER_TRADUCTION)
+			</ul>
+		</div>]
+	]
+</div>

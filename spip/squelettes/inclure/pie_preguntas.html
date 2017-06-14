@@ -1,0 +1,53 @@
+<div class="container footer">
+    <div class="footer_top contenedor-footer">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 footer_grid">
+                <div class="contenedor-footer-centro logo-embajador">
+
+                    <BOUCLE_logoEmbajadores(ARTICLES){id_article=#ID}>
+                    <a target="_blank" href="#URL_SITE">
+                        [(#ID|=={161}|oui)
+                            <img style="max-width: 328px;" class="imagen-completa" alt="LOGO" src="IMG/arton161.png">
+                        ]
+                        [(#ID|=={161}|non)
+                            [(#LOGO_ARTICLE||image_reduire{200,200})]
+                        ]
+                    </a>
+                    </BOUCLE_logoEmbajadores>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 footer_grid">
+                <div class="contenedor-footer-centro">
+                    <a href="http://types-project.eu/">
+                        <img class="imagen-footer-ue" src="../test/test_ionic/www/img/footer/logo_types_negro.png" alt="">
+                    </a>
+                    <a href="http://types-project.eu/">
+                        <img class="imagen-footer-ue" src="../test/test_ionic/www/img/footer/logo_ue_negro.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 footer_grid">
+                <p class="texto-footer-derecha" style="font-family: lato_regular">
+                    <BOUCLE_seccionPadreMenu2(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+                    <BOUCLE_seccionPreguntasMenu2(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}{titre_mot=menu}>
+                    <BOUCLE_seccionArticuloMenu2(ARTICLES){id_rubrique}{par titre}>
+                    <!-- COMO ENLAZAR -->
+                    <img style="width: 5px;" src="../test/test_ionic/www/img/footer/dot.svg" alt="|">
+                    <a href="#SOUSTITRE">#TITRE</a>
+                    </BOUCLE_seccionArticuloMenu2>
+                    </BOUCLE_seccionPreguntasMenu2>
+                    </BOUCLE_seccionPadreMenu2>
+                </p>
+                <ul id="iconos_redes">
+                    [(#GLOBALS{'idioma'}|=={es}|oui)
+                        #SET{COMPARTIR_URL, http://testdeprivacidad.com/spip/#SELF}
+                        #SET{COMPARTIR_ARTICULO, http://testdeprivacidad.com/spip/IMG/arton}
+                    ]
+                    <li><a title="Compartir en Facebook" href="https://www.facebook.com/AsociaciondeUsuariosdeInternet" target="_blank"><img class="imagen-footer imagen-footer-rss" src="../test/test_ionic/www/img/footer/facebook.svg" alt=""></a></li>
+                    <li><a title="Compartir en Twitter" href="https://twitter.com/usuariosdeinter" target="_blank"><img class="imagen-footer imagen-footer-rss" src="../test/test_ionic/www/img/footer/twitter.svg" alt=""></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

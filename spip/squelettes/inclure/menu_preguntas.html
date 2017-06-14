@@ -1,0 +1,42 @@
+<div class="header">
+    <div class="container header_top">
+        <div class="logo">
+            <a class="div-logo-imagen" ng-href="index.php">
+                <img class="" title="TESTdePRIVACIDAD" src="../test/test_ionic/www/img/menu/imagen_principal.png" alt="Logo">
+                <BOUCLE_seccionPadre1(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+                    <BOUCLE_seccionHme(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}{titre_mot=home}>
+                        <BOUCLE_articuloTitulo(ARTICLES){lang=#GLOBALS{'idioma'}}{par titre}{titre_mot=titulo_web}{id_rubrique=#ID_RUBRIQUE}>
+                            <span id="texto-menu">#TITRE</span>
+                        </BOUCLE_articuloTitulo>
+                    </BOUCLE_seccionHme>
+                </BOUCLE_seccionPadre1>
+            </a>
+        </div>
+        <div class="menu">
+            <a class="toggleMenu" href="#"><img src="../test/test_ionic/www/img/menu/nav_icon.png" alt="" /> </a>
+            <ul class="nav" id="nav">
+                <BOUCLE_seccionPadre(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+                <!-- Bucle que saca el hijo de la primera seccion en el idioma actual -->
+                    <BOUCLE_seccionPreguntas(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}>
+                            <BOUCLE_listadoPreguntas(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=#ID_RUBRIQUE}>
+                                <li>
+                                    <a href="[(#TEXTE|PtoBR)]">
+                                        [(#LOGO_RUBRIQUE ||inserer_attribut{alt, #TITRE}||inserer_attribut{title, #TITRE}||inserer_attribut{class, 'logo_menu'})]
+                                    </a>
+                                </li>
+                            </BOUCLE_listadoPreguntas>
+                    </BOUCLE_seccionPreguntas>
+                </BOUCLE_seccionPadre>
+                <li>
+                    <a title="#GLOBALS{idioma_sig}" href="?lang=#GLOBALS{idioma_sig}">
+                        <img class="logo_menu" src="../test/test_ionic/www/img/menu/idioma verde.svg" alt="">
+                    </a>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <script type="text/javascript" src="../test/test_ionic/www/js/plantilla2/responsive-nav.js"></script>
+        </div>
+        <div class="clearfix"> </div>
+        <!----//End-top-nav---->
+    </div>
+</div>

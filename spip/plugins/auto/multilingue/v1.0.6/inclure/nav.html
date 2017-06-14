@@ -1,0 +1,11 @@
+<BOUCLE_nav(RUBRIQUES) {racine} {par num titre}{!par date}{lang}>
+	<B_enfants>
+	<div class="nav clearfix[ (#TOTAL_BOUCLE|=={1}|oui)none]" id="nav">
+		<ul class="menu-liste">
+		<BOUCLE_enfants(RUBRIQUES){id_parent}>
+			<li class="[(#EXPOSE) ]menu-entree item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+		</BOUCLE_enfants>
+		</ul>
+	</div>
+	</B_enfants>
+</BOUCLE_nav>

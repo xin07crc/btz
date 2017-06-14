@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- JQUERY -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!-- FORM CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="contenedor">
+    <div id="contenedor-principal" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <p tkey="fds" class="traducir"></p>
+        <p id="titulo" tkey="titulo" class="traducir"></p>
+        <form id="formulario" class="pure-form-stacked" method="POST">
+            <div id="com-derecha" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <!-- PLATAFORMA -->
+                    <p  tkey="optiona" class="traducir"></p>
+                    <label tkey="plataforma" class="traducir"></label>
+                    <select id="plataforma1" class="plataforma" name="plataforma1" required>
+                        <option selected value="false"> -- </option>
+                        <option value="goo">Google</option>
+                        <option value="57">Youtube</option>
+                        <option value="61">Facebook</option>
+                        <option value="135">Instagram</option>
+                    </select>
+                    <!-- PREFERENCE -->
+                    <div class="ocultar contenedor_preferencias">
+                        <label tkey="preferencias" class="traducir"></label>
+                        <select class="preferencias" name="preferencias1">
+                        </select>
+                    </div>
+                    <!-- LOCATION -->
+                    <div class="ocultar contenedor_location">
+                        <label tkey="pais" class="traducir"></label>
+                        <select class="location">
+                        </select>
+                    </div>
+                    <!-- ONLY FB Y INS -->
+                    <!-- BIDDING -->
+                    <div class="ocultar contenedor_bidding">
+                        <label class="pure-radio">
+                            <label tkey="puja" class="traducir"></label>
+                            <input class="bidding" type="radio" name="bidding1" value="CPC" checked>
+                            <span class="traducir" tkey="cpc"></span>
+                            <input class="bidding" type="radio" name="bidding1" value="CPA">
+                            <span class="traducir" tkey="cpa"></span>
+                            <input class="bidding" type="radio" name="bidding1" value="CPM">
+                            <span class="traducir" tkey="cpm"></span>
+                        </label>
+                    </div>
+                    <!-- GENDER -->
+                    <div class="ocultar contenedor_genero">
+                        <label class="pure-radio">
+                            <label tkey="genero" class="traducir"></label>
+                            <input class="genero" type="radio" name="genero1" value="all" checked>
+                            <span class="traducir" tkey="all"></span>
+                            <input class="genero" type="radio" name="genero1" value="male">
+                            <span class="traducir" tkey="male"></span>
+                            <input class="genero" type="radio" name="genero1" value="female">
+                            <span class="traducir" tkey="female"></span>
+                        </label>
+                    </div>
+            </div>
+            <div id="com-izquierda" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <!-- PLATAFORMA -->
+                <p  tkey="optionb" class="traducir"></p>
+                <label tkey="plataforma" class="traducir"></label>
+                <select id="plataforma2" class="plataforma" name="plataforma2" required>
+                    <option selected value="false"> -- </option>
+                    <option value="goo">Google</option>
+                    <option value="57">Youtube</option>
+                    <option value="61">Facebook</option>
+                    <option value="135">Instagram</option>
+                </select>
+                <!-- PREFERENCE -->
+                <div class="ocultar contenedor_preferencias">
+                    <label tkey="preferencias" class="traducir"></label>
+                    <select class="preferencias" name="preferencias1">
+                    </select>
+                </div>
+                <!-- LOCATION -->
+                <div class="ocultar contenedor_location">
+                    <label tkey="pais" class="traducir"></label>
+                    <select class="location">
+                    </select>
+                </div>
+                <!-- ONLY FB Y INS -->
+                <!-- BIDDING -->
+                <div class="ocultar contenedor_bidding">
+                    <label class="pure-radio">
+                        <label tkey="puja" class="traducir"></label>
+                        <input class="bidding" type="radio" name="bidding2" value="CPC" checked>
+                        <span class="traducir" tkey="cpc"></span>
+                        <input class="bidding" type="radio" name="bidding2" value="CPA">
+                        <span class="traducir" tkey="cpa"></span>
+                        <input class="bidding" type="radio" name="bidding2" value="CPM">
+                        <span class="traducir" tkey="cpm"></span>
+                    </label>
+                </div>
+                <!-- GENDER -->
+                <div class="ocultar contenedor_genero">
+                    <label class="pure-radio">
+                        <label tkey="genero" class="traducir"></label>
+                        <input class="genero" type="radio" name="genero2" value="all" checked>
+                        <span class="traducir" tkey="all"></span>
+                        <input class="genero" type="radio" name="genero2" value="male">
+                        <span class="traducir" tkey="male"></span>
+                        <input class="genero" type="radio" name="genero2" value="female">
+                        <span class="traducir" tkey="female"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="contenedor_submit col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input id="send" type="button" value="Send" class="pure-button pure-button-primary">
+            </div>
+            <div class="contenedor_submit col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img src="" id="imagen-final">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

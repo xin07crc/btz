@@ -1,0 +1,5 @@
+<div id="entete">
+<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil">[(#LOGO_SITE_SPIP|image_reduire{300,100}) ]<strong id="nom_site_spip">#NOM_SITE_SPIP</strong></a>
+[(#CONFIG{multilingue/menu_langue}|oui)#SET{select,_select}]
+<INCLURE{fond=inclure/menu_langues#GET{select},env}/>
+</div>

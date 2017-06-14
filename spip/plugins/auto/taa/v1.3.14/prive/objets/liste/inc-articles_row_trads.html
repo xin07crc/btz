@@ -1,0 +1,4 @@
+<BOUCLE_art_trads(ARTICLES){id_trad}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{id_article!=#ENV{id_article}}{id_trad!=0}{statut IN prepa,publie,prop}>
+		#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
+		<INCLURE{fond=prive/objets/liste/inc-articles_row}{id_article}{class=trads_#GET{class}}/>
+</BOUCLE_art_trads>

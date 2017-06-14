@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "bariol_serif_regular_italic";
+    src: url(../fuentes/Bariol_Serif_Regular_Italic.otf);
+}
+* {
+    font-family: bariol_serif_regular_italic;
+}
+.contenedor_preferencias, .contenedor_location, .contenedor_bidding, .contenedor_genero {
+    display: none;
+}
+.contenedor_submit {
+    text-align: center;
+    margin-top: 5%;
+}
+#contenedor {
+    width: 100%;
+    height: 450px;
+}
+/*
+#contenedor-principal {
+    max-width: 1125px;
+    margin-left: auto;
+    margin-right: auto;
+}
+*/
+#imagen-final {
+    width: 69%;
+}
+#com-derecha {
+    font-weight: bold;
+    color: black;
+}
+#com-izquierda {
+    font-weight: bold;
+    color: blue;
+}
+#send {
+    background-color: #47b24f;
+}
+#titulo {
+    color: #47b24f;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}

@@ -1,0 +1,38 @@
+[(#TOKEN|oui)
+#SET{'token', #TOKEN}
+]
+<div id="nav">
+    <nav class="navbar navbar-custom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
+                <a class="navbar-brand page-scroll" href="?page=btz_home"><IMG src="IMG/BetacitizensLogo.png" class="IMG-responsive"></a> </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden"> <a href="#page-top"></a> </li>
+                    <B_conseguirTokenUsuario>
+                        <BOUCLE_conseguirTokenUsuario(registroreto){si #GET{'token'}}{token=#GET{'token'}}{status=1}>
+                            <li> <a class="page-scroll" href="?page=btz_realizadas" translate>Tests</a></li>
+                            <li> <a class="page-scroll" href="?page=btz_perfil" translate>Profile</a> </li>
+                            <li> <a class="page-scroll" href="?page=btz_historial" translate>Log</a> </li>
+                            <li> <a class="page-scroll" href="?page=btz_puntos" translate>Prizes</a> </li>
+                            <li> <a class="page-scroll" href="#" translate>#NOMBRE</a> </li>
+                            <li> <a title="Disconnect" class="page-scroll" href="test/test_ionic/www/php/destroyregistro.php" translate>
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </a> </li>
+                        </BOUCLE_conseguirTokenUsuario>
+                    </B_conseguirTokenUsuario>
+                            <li> <a style="letter-spacing: 0px;!important;" class="page-scroll" href="?page=btz_home#como">Concept</a> </li>
+                            <li> <a style="letter-spacing: 0px;!important;" class="page-scroll" href="?page=btz_home#betatester">BetaTesters</a> </li>
+                            <li> <a style="letter-spacing: 0px;!important;" class="page-scroll" href="?page=btz_home#proyecto">Projects</a> </li>
+                            <li> <a style="letter-spacing: 0px;!important;" class="page-scroll" href="?page=new_loginreto">Login</a> </li>
+                            <li> <a style="letter-spacing: 0px;!important;" class="page-scroll" href="?page=new_registrousuarioreto">Register</a> </li>
+                    <//B_conseguirTokenUsuario>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

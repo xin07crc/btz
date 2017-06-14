@@ -1,0 +1,36 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <p style="text-align: right">
+        [(#TOKEN|oui)
+        #SET{'token', #TOKEN}
+        ]
+        <B_conseguirTokenUsuario>
+            <BOUCLE_conseguirTokenUsuario(registroreto){si #GET{'token'}}{token=#GET{'token'}}{status=1}>
+                <span style="margin-right: 2%;" title="">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <a href="?page=btz_realizadas" title="{{'Usuario'|translate}}">
+                        #NOMBRE
+                    </a>
+                </span>
+            <a title="{{'Desconectar'|translate}}" href="test/test_ionic/www/php/destroyregistro.php">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            <span translate>
+                                                Desconectar
+                                            </span>
+            </a>
+            </BOUCLE_conseguirTokenUsuario>
+        </B_conseguirTokenUsuario>
+        <a style="margin-right: 2%;" title="{{'Conectarse'|translate}}" href="?page=loginreto">
+            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span translate>
+                                                Conectarse
+                                            </span>
+        </a>
+        <a title="{{'Registrarse'|translate}}" href="?page=registrousuarioreto">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                            <span translate>
+                                                Registrarse
+                                            </span>
+        </a>
+    <//B_conseguirTokenUsuario>
+    </p>
+</div>

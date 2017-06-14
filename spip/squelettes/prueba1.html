@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <h1>Test complete</h1>
+
+    <p>USER TOKEN: #TU</p>
+    <p>APP ID: #IA</p>
+    <p>COMPLETION CODE: <span id="codigo"></span></p>
+
+
+
+    <a id="enlacefinal" href="testend/index.php?tu=#TU&ia=#IA&cf=QWERTY">End task</a>
+</body>
+</html>
+<script>
+    var codigo = generar(5);
+    console.log(codigo);
+    document.getElementById("enlacefinal").href = "testend/index.php?tu=#TU&ia=#IA&cf=" + codigo;
+    document.getElementById("codigo").innerHTML = codigo;
+    function generar(longitud) {
+        var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHIJKLMNPQRTUVWXYZ2346789";
+        var contraseña = "";
+        for (i=0; i<longitud; i++) contraseña += caracteres.charAt(Math.floor(Math.random()*caracteres.length));
+        return contraseña;
+    }
+</script>

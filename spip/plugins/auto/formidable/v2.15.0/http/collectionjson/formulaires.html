@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_creation,#ENV{date_sens,-1},
+	maj,#ENV{date_sens,-1},
+	id_formulaire,1,
+	points,-1,
+}})]
+
+{
+	"collection": {
+		"version": "1.0",
+		"href": "[(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires}|url_absolue)]",
+		"title": "#NOM_SITE_SPIP - <:formidable:bouton_formulaires:>",
+		"updated": "[(#DATE|date_iso)]"
+		<B_formulaires>
+		,
+		"links": [
+			{"rel":"self", "type":"application/json", "href":"[(#VAL{&}|self|url_absolue)]"}[,
+			(#PAGINATION{collectionjson})]
+		],
+		"totalResults": #GRAND_TOTAL,
+		"startIndex": #ENV{debut_formulaires,0},
+		"itemsPerPage": #ENV{pagination,100},
+		"items": [
+		<BOUCLE_formulaires(FORMULAIRES formulaires_liens)
+			{statut IN #ENV{statut,#LISTE{publie}}}
+			{id_auteur?}
+			{formulaires_liens.objet?}{formulaires_liens.id_objet?}
+			{recherche?}
+			{tri #ENV{par,#ENV{recherche}|?{points,date_creation}},#GET{defaut_tri}}
+			{pagination #ENV{pagination,100}}{","}
+		>
+			<INCLURE{fond=http/collectionjson/inc-formulaire, id_formulaire, mode, objet=#ENV{objet}, id_objet=#ENV{id_objet}, url_self=#SELF}>
+		</BOUCLE_formulaires>
+		]
+		</B_formulaires>
+	}
+}

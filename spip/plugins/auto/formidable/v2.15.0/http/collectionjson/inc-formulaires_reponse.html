@@ -1,0 +1,36 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){id_formulaires_reponse}{statut?}>
+[(#SET{item, [(#ARRAY{
+	href, [(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires_reponses/#ID_FORMULAIRES_REPONSE})],
+	published, [(#DATE|date_iso)],
+	updated, [(#MAJ|date_iso)],
+	links, [(#LISTE{
+		[(#ARRAY{rel,edit, type,application/json, href,[(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires_reponses/#ID_FORMULAIRES_REPONSE})]})],
+		[(#ARRAY{rel,up, type,application/json, href,[(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires/#ID_FORMULAIRE})]})],
+	})],
+	data, [(#LISTE{
+		#ARRAY{name,id_formulaires_reponse, value,#ID_FORMULAIRES_REPONSE},
+		#ARRAY{name,statut, value,#STATUT},
+		#ARRAY{name,date, value,#DATE},
+		#ARRAY{name,maj, value,#MAJ},
+	})],
+})]})]
+
+[(#REM) Si on a le plugin de quizz ]
+[(#PLUGIN{formidable_quizz}|oui)
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,quizz_score, value,#QUIZZ_SCORE, prompt,<:formidable_quizz:resultats_score_label:>})]})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,quizz_total, value,#QUIZZ_TOTAL, prompt,<:formidable_quizz:resultats_total_label:>})]})]})]
+]
+
+[(#REM) On va chercher chaque champ ]
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+[(#ENV{mode}|!={raw}|oui)
+	#SET{valeur, #ID_FORMULAIRES_REPONSE|calculer_voir_reponse{#ID_FORMULAIRE, #NOM, valeur_uniquement}|trim}
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,#NOM, value,#GET{valeur}})]})]})]
+]
+[(#ENV{mode}|=={raw}|oui)
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,#NOM, value,#VALEUR})]})]})]
+]
+</BOUCLE_champs>
+
+[(#GET{item}|json_encode)]
+</BOUCLE_formulaires_reponse>

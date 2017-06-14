@@ -1,0 +1,91 @@
+<div class="formulaire_spip formulaire_demo">
+    [<p class='success'>(#ENV*{message_ok})</p>]
+    [<p class='error'>(#ENV*{message_erreur})</p>]
+    [(#ENV*{message_ok}|non)
+        <form action="?page=btz_manager" enctype="multipart/form-data" method="POST" name="form">
+            <div>
+                #ACTION_FORMULAIRE{#ENV{action}}
+                <span class="titulo-main">Crear proyecto</span>
+                <div style="max-width: 340px; margin-left: auto; margin-right: auto">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="nom_pro"><strong>Nombre del proyecto</strong></label>
+                            <input class="ancho2 form-control" type="text" name="nom_pro" value="#ENV{'nom_pro'}" id="nom_pro" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="nom_ta"><strong>Nombre de la tarea</strong></label>
+                            <input class="ancho2 form-control" type="text" name="nom_ta" value="#ENV{'nom_ta'}" id="nom_ta" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="desc_pro"><strong>Descripcion del proyecto</strong></label>
+                            <textarea name="desc_pro" value="#ENV{'desc_pro'}" id="desc_pro" required class="ancho2 form-control" placeholder="Descripcion del proyecto"></textarea>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="descbr_de"><strong>Descripcion detallada</strong></label>
+                            <textarea name="descbr_de" value="#ENV{'descbr_de'}" id="descbr_de" required class="ancho2 form-control" placeholder="Descripcion detallada "></textarea>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="info"><strong>Información</strong></label>
+                            <input class="ancho2 form-control" type="text" name="info" value="#ENV{'info'}" id="info" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="enlace"><strong>Enlace</strong></label>
+                            <input class="ancho2 form-control" type="text" name="enlace" value="#ENV{'enlace'}" id="enlace" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="fech_com"><strong>Fecha de comienzo</strong></label>
+                            <input class="ancho2 form-control" type="date" name="fech_com" value="#ENV{'fech_com'}" id="fech_com" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="fech_fin"><strong>Fecha de comienzo</strong></label>
+                            <input class="ancho2 form-control" type="date" name="fech_fin" value="#ENV{'fech_fin'}" id="fech_fin" required>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="dif"><strong>Dificultad</strong></label>
+                            <select id="dif" name="dif" class="form-control">
+                                <option>Selecciona dificuldad</option>
+                                <option value="10">Baja</option>
+                                <option value="20">Media</option>
+                                <option value="30">Alta</option>
+                                <option value="50">Muy Alta</option>
+                            </select>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="input-block">
+                            <label class="label-candidatura" for="idioma"><strong>Idioma</strong></label>
+                            <select id="idioma" name="idioma" class="form-control">
+                                <option>Selecciona idioma</option>
+                                <option value="es">Español</option>
+                                <option value="en">Ingles</option>
+                            </select>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <input type="submit" class="form-control" value="enviar">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    ]
+
+</div>

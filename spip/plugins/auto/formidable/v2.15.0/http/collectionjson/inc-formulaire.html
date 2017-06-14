@@ -1,0 +1,43 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{statut?}>
+[(#SET{item, [(#ARRAY{
+	href, [(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires/#ID_FORMULAIRE})],
+	published, [(#DATE_CREATION|date_iso)],
+	updated, [(#MAJ|date_iso)],
+	links, [(#LISTE{
+		[(#ARRAY{rel,edit, type,application/json, href,[(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires/#ID_FORMULAIRE})]})],
+	})],
+	data, [(#LISTE{
+		#ARRAY{name,id_formulaire, value,#ID_FORMULAIRE},
+		#ARRAY{name,identifiant, value,#IDENTIFIANT},
+		#ARRAY{name,statut, value,#STATUT},
+		#ARRAY{name,date_creation, value,#DATE_CREATION},
+		#ARRAY{name,maj, value,#MAJ},
+	})],
+})]})]
+
+[(#REM) Si on trouve un logo, on ajoute un lien "preview" ]
+#SET{logo, #LOGO_FORMULAIRE}
+[(#GET{logo}|oui)
+[(#SET{item, [(#GET{item}|push_table_valeur{links, #ARRAY{rel,preview, href,#GET{logo}|image_reduire{1200,0}|extraire_attribut{src}|url_absolue}})]})]
+]
+
+[(#REM) Des champs au contenu interprété en HTML ]
+[(#ENV{mode}|!={raw}|oui)
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,titre, value,#TITRE, prompt,<:info_titre:>})]})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,descriptif, value,#DESCRIPTIF, prompt,<:info_descriptif:>})], #DESCRIPTIF})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,message_retour, value,[(#MESSAGE_RETOUR|propre)], prompt,<:formidable:editer_message_ok:>})], #MESSAGE_RETOUR})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,saisies, array,[(#SAISIES|unserialize)], prompt,<:formidable:champs:>})], #SAISIES})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,traitements, array,[(#TRAITEMENTS|unserialize)], prompt,<:formidable:voir_traitements:>})], #TRAITEMENTS})]})]
+]
+
+[(#REM) Des champs au contenu BRUT qui peut être modifié ]
+[(#ENV{mode}|=={raw}|oui)
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,titre, value,#TITRE*, prompt,<:info_titre:>})]})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,descriptif, value,#DESCRIPTIF*, prompt,<:info_descriptif:>})], #DESCRIPTIF*})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,message_retour, value,#MESSAGE_RETOUR*, prompt,<:formidable:editer_message_ok:>})], #MESSAGE_RETOUR})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,saisies, value,#SAISIES*, prompt,<:formidable:champs:>})], #SAISIES})]})]
+	[(#SET{item, [(#GET{item}|push_table_valeur{data, [(#ARRAY{name,traitements, value,#TRAITEMENTS*, prompt,<:formidable:voir_traitements:>})], #TRAITEMENTS})]})]
+]
+
+[(#GET{item}|json_encode)]
+</BOUCLE_formulaire>

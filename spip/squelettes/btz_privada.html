@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TYP">
+    <meta name="twitter:creator" content="@TYP">
+    <meta name="twitter:title" content="Test de privacidad">
+    <meta name="twitter:description" content="¿Porque es importante tu privacidad?">
+    <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg">
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="http://testdeprivacidad.com/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Test de privacidad" />
+    <meta property="og:description" content="¿Porque es importante tu privacidad?" />
+    <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg" />
+    <meta charset="UTF-8">
+    <title>betaCitizens</title>
+    <!-- ionic/angularjs js -->
+    <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+    <!-- your app's js -->
+    <script src="test/test_ionic/www/js/angular/app.js"></script>
+    <!-- JS PROPIO -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- HUELLA DIGITAL -->
+    <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+    <!-- Libreria de angular gettext -->
+    <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="test/test_ionic/www/js/traducciones/traducciones.js"></script>
+    <!-- ANGULAR COOKIES -->
+    <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+    <!-- ANGULAR LOCALSTORAGE -->
+    <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- Libreria sweet Alert 2 -->
+    <!-- for IE support -->
+    <script src="https://cdn.jsdelivr.net/es6-promise/latest/es6-promise.auto.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/node_modules/es6-promise/dist/es6-promise.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.js"></script>
+    <link rel="stylesheet" href="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.min.css">
+    <!-- Libreria Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <script src="test/test_ionic/www/js/plantilla2/easyResponsiveTabs.js" type="text/javascript"></script>
+    <!-- Añadido Arraytofilter-->
+    <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="test/test_ionic/www/lib/font-awesome/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+            var parametros = getUrlVars();
+            if (parametros["token"]) {
+                document.cookie = "token=" + parametros["token"];
+            }
+        });
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function(m,key,value) {
+                        vars[key] = value;
+                    });
+            return vars;
+        }
+        /**
+         *
+         * @param titulo
+         * @param texto
+         */
+        function abrir_popup(titulo_env, id_texto, logo_url) {
+            var pregunta = "<div class='contenedor-mas-huella texto-normal'>";
+            var imagen = "<div style='margin-bottom: 3%;'><img style='width: 46px' src='" + logo_url + "' alt='logo'></div>";
+            var texto = document.getElementById(id_texto).innerHTML;
+            //console.log(texto);
+            pregunta += texto;
+            pregunta += "</div>";
+            var titulo = imagen;
+            titulo += titulo_env;
+            swal({
+                title: titulo,
+                text: pregunta,
+                animation: false,
+            })
+        }
+
+
+    </script>
+</head>
+<body id="internas" ng-app="starter" class="body-fondo-internas betatester" ng-controller="internas">
+<!-- test/test_ionic/www/img/seccion/   -->
+<!----start-header---->
+<div class="wrapper">
+    <!-- MENU -->
+
+    #CACHE{0}
+    #SET{'token', #EVAL{$_COOKIE["token"]}}
+
+
+    [(#INCLURE{fond=inclure/menu_preguntas_beta}{token=#GET{'token'}}{id_rubrique=#ID_RUBRIQUE})]
+    <!-- CONTAINER IMAGEN + TEXTO -->
+    <div class="main contenedor-titulo">
+        <div class="contenedor-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="container-fluid">
+                            <B_conseguirUsuario>
+                                [(#INCLURE{fond=inclure/btz_menu_usuario}{token=#GET{'token'}})]
+                                [(#INCLURE{fond=inclure/btz_menu_privado}{token=#GET{'token'}})]
+
+                                <BOUCLE_conseguirUsuario(registroreto){token=#GET{'token'}}>
+                                <div style="margin-top: 25px; float: left">
+                                    Area privada de #NOMBRE
+                                </div>
+                                </BOUCLE_conseguirUsuario>
+
+                            </B_conseguirUsuario>
+                                <h1>No estas logeado</h1>
+                            <//B_conseguirUsuario>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PIE -->
+[(#INCLURE{fond=inclure/btz_pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+[(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+</div>
+</body>
+</html>

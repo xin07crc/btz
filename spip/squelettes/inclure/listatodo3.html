@@ -1,0 +1,43 @@
+<BOUCLE_seccionPadre(RUBRIQUES){id_parent=8}>
+<ul style="color: grey">
+    <li>#TITRE</li>
+    <BOUCLE_seccionPreguntas(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par titre}>
+    <ul style="color: grey">
+        <li class="cabecera-listado-preguntas" ng-click="preguntasSecciones#ID_RUBRIQUE=!preguntasSecciones#ID_RUBRIQUE">#TITRE</li>
+        <BOUCLE_conseguirArticulos(ARTICLES){id_rubrique}{par titre}>
+        <ul ng-hide="preguntasSecciones#ID_RUBRIQUE" style="color: grey">
+            <a href="#" style="list-style: none; text-decoration: none; color: black">
+                <li ng-click="preguntasArticulos#ID_ARTICLE=!preguntasArticulos#ID_ARTICLE">#TITRE</li>
+            </a>
+            <ul style="color: black">
+                <li ng-hide="preguntasArticulos#ID_ARTICLE">
+                    #TEXTE
+                </li>
+            </ul>
+        </ul>
+        </BOUCLE_conseguirArticulos>
+        <BOUCLES_conseguirAcciones(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+        <ul style="color: black">
+            <li>#TITRE</li>
+            <BOUCLE_dentroAcciones(ARTICLES){id_rubrique}>
+            <ul style="color: black">
+                <li>#TITRE</li>
+                <ul>
+                    <li><p>#TEXTE</p></li>
+                </ul>
+            </ul>
+            </BOUCLE_dentroAcciones>
+        </ul>
+        </BOUCLES_conseguirAcciones>
+    </ul>
+    </BOUCLE_seccionPreguntas>
+    <BOUCLE_Articulos(ARTICLES){id_rubrique}>
+    <ul style="color: darkgray">
+        <li>#TITRE</li>
+        <ul style="color: black">
+            <li>#TEXTE</li>
+        </ul>
+    </ul>
+    </BOUCLE_Articulos>
+</ul>
+</BOUCLE_seccionPadre>

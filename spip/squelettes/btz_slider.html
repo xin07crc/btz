@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>betaCitizens</title>
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/fb_testdeprivacidad.jpg" />
+    <meta property="og:title" content="Test de privacidad" />
+    <meta property="og:description" content="¿Porque es importante tu privacidad?" />
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@typ" />
+    <meta name="twitter:title" content="Test de privacidad" />
+    <meta name="twitter:description" content="¿Porque es importante tu privacidad?" />
+    <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/twitter_testyourprivacy.jpg" />
+    <!-- TWITTER/FIN -->
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/normalize.css">
+    <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/webflow.css">
+    <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/plantilla/elpis.webflow.css">
+    <link rel="stylesheet" type="text/css" href="test/test_ionic/www/css/custom/style.css">
+    <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+    <!-- BOOTSTRAP -->
+    <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- JS PROPIO -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- Huella digital -->
+    <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+    <!-- Controladores -->
+    <script src="test/test_ionic/www/js/angular/app.js"></script>
+    <!-- ANGULAR COOKIES -->
+    <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+    <!-- ANGULAR LOCALSTORAGE -->
+    <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- JQUERY CUSTOM -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- Libreria de angular gettext -->
+    <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="test/test_ionic/www/js/traducciones/traducciones.js"></script>
+    <!-- Añadido Arraytofilter-->
+    <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+    <!-- SLIDER -->
+    <script type="text/javascript" src="test/test_ionic/www/lib/supersized/supersized.3.2.7.js"></script>
+    <script type="text/javascript" src="test/test_ionic/www/lib/supersized/supersized.shutter.js"></script>
+
+    <link rel="stylesheet" href="test/test_ionic/www/lib/supersized/supersized.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="test/test_ionic/www/lib/supersized/supersized.shutter.css" type="text/css" media="screen" />
+    <!-- FIN SLIDER -->
+    <script type="text/javascript" src="test/test_ionic/www/js/plantilla/modernizr.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="images/fav.png">
+    <link rel="apple-touch-icon" href="images/fav mob.png">
+    <script type="text/javascript">
+
+        jQuery(function($){
+
+            $.supersized({
+                // Functionality
+                slideshow:   1,         // Slideshow on/off
+                autoplay:    1,         // Slideshow starts playing automatically
+                start_slide: 1,         // Start slide (0 is random)
+                stop_loop:   0,         // Pauses slideshow on last slide
+                random:      0,         // Randomize slide order (Ignores start slide)
+                slide_interval:  12000,     // Length between transitions
+                transition:  1,         // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, . . .
+                transition_speed:300,       // Speed of transition
+                new_window:  1,         // Image links open in new window/tab
+                pause_hover: 0,         // Pause slideshow on hover
+                keyboard_nav:1,         // Keyboard navigation on/off
+                performance: 1,         // 0-Normal, 1-Hybrid speed/quality, 2-Optimizes image
+                image_protect:1,                // Disables image dragging and right click with Javascript
+
+                // Size & Position
+                min_width:   0,         // Min width allowed (in pixels)
+                min_height:  0,         // Min height allowed (in pixels)
+                vertical_center:   0,       // Vertically center background
+                horizontal_center: 1,       // Horizontally center background
+                fit_always:  1,         // Image will never exceed browser width
+                fit_portrait:1,                 // Portrait images will not exceed browser height
+                fit_landscape:     0,       // Landscape images will not exceed browser width
+
+                // Components
+                slide_links:    'blank',    // Individual links for each slide (Options: false, 'num'
+                thumb_links: 0,         // Individual thumb links for each slide
+                thumbnail_navigation: 0,    // Thumbnail navigation
+                slides 					:
+                        [			// Slideshow Images
+
+
+            <BOUCLE_conseguirRubriqueSlider(RUBRIQUES){id_rubrique=79}>
+            <BOUCLE_conseguirSlider(ARTICLES){id_rubrique=#ID_RUBRIQUE}>
+            {
+                image : '[(#LOGO_ARTICLE|extraire_attribut{src})]',
+                title : '<div class="contenedor-info-slider"><div class="contenedor-titulo-slider">#TITRE</div><div class="contenedor-subtitulo-slider">#SOUSTITRE</div><div style="text-align:left"><a class="contenedor-boton-slider" href="#URL_SITE">#NOM_SITE</a></div></div>',
+            },
+            </BOUCLE_conseguirSlider>
+            </BOUCLE_conseguirRubriqueSlider>
+            ]
+
+        });
+        });
+
+    </script>
+    <style>
+        .footer {
+            display: none;
+        }
+    </style>
+</head>
+<body id="slider-home" ng-app="starter" ng-controller="home">
+<div id="home-top" data-ix="fix-nav-trigger" class="top-section-for-nav-to-show"></div>
+<!-- CABECERA -->
+#SET{'token', #EVAL{$_COOKIE["token"]}}
+[(#TOKEN|oui)
+#SET{'token', #TOKEN}
+]
+[(#INCLURE{fond=inclure/menu_preguntas_beta}{token=#GET{'token'}}{id_rubrique=#ID_RUBRIQUE})]
+<!-- CONTENIDO -->
+<div id="home-slider">
+    <div class="overlay"></div>
+
+    <div class="slider-text">
+        <div id="slidecaption"></div>
+    </div>
+
+    <div class="control-nav">
+        <a id="prevslide" class="load-item"><i class="font-icon-arrow-simple-left"></i></a>
+        <a id="nextslide" class="load-item"><i class="font-icon-arrow-simple-right"></i></a>
+        <ul id="slide-list"></ul>
+
+        <a id="nextsection" href="#work"><i class="font-icon-arrow-simple-down"></i></a>
+    </div>
+</div>
+[(#INCLURE{fond=inclure/pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+[(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+<script type="text/javascript" src="test/test_ionic/www/js/plantilla/webflow.js"></script>
+<!--
+	<script type="text/javascript" src="https://d3e54v103j8qbb.cloudfront.net/js/webflow-template.5f4b27e6ec.js"></script>
+  <!--[if lte IE 9]>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

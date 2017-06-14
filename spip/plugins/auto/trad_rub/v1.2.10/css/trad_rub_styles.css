@@ -1,0 +1,124 @@
+.onglets_traduction {
+	width: auto;
+	height: auto;
+	vertical-align: baseline;
+}
+
+.onglets_traduction div.options {
+	margin: 0;
+	padding: 0;
+}
+
+.onglets_traduction.barre_onglet li.box_onglet {
+	float: left;
+}
+
+.onglets_traduction.barre_onglet  ul > li.box_onglet:last-child {
+	float: none;
+}
+
+.changer div.onglet {
+	background: #F2F2F2;
+	font-style: italic;
+}
+
+.onglets_traduction div.options a {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+.onglets_traduction div.options a:hover span {
+	display: block;
+	width: 72px;
+	text-align: center;
+	background: #ffffff;
+	height: auto;
+}
+.onglets_traduction.barre_onglet {
+	width: auto
+}
+.onglets_traduction.barre_onglet li {
+	display: inline-table;
+	float: none;
+	vertical-align: middle;
+	margin: 0
+}
+
+.onglets_traduction.barre_onglet a, .onglets_traduction.barre_onglet strong {
+	padding: 5px
+}
+.onglets_traduction.barre_onglet li.bouton_options {
+	border: none;
+}
+.onglets_traduction.barre_onglet .bouton_options a {
+	padding: 0px
+}
+
+.barre_onglet .traduit a {
+	background: #ffffff;
+}
+.barre_onglet .non_traduit a {
+	background: #eeeeee;
+	font-style: italic;
+}
+
+.bouton_options {/* float:right; */
+}
+.bouton_options img {
+	margin-top: 5px
+}
+
+.nettoyeur {
+	clear: both;
+}
+
+.delier {
+	height: 100px;
+	float: left, margin :0 5px;
+	float: left
+}
+
+.danger, .onglets_traduction a.cellule-h-texte {
+	background: repeat scroll 0 0 white;
+}
+
+.lang {
+	margin-right: 5px;
+}
+
+.changer {/* float:left; */
+	margin-bottom: 5px
+}
+
+.liste-elements table.spip tr.trads {
+	background: #dfdfdf
+}
+
+div.ref {
+	cursor: help;
+	position: absolute;
+	right:3px;
+	top: 0;
+	z-index: 100;
+}
+
+div.ref span {
+	display: none;
+}
+
+div.ref:hover span {
+	display: block;
+	position: absolute;
+	top: -25px;
+	color: #000000;
+	font-weight: bold;
+	width: 250px;
+}
+
+.icone_delier_traduction {
+	color: #333333;
+	margin: 2.0775em 0;
+	padding: 0 10px;
+	text-align: center;
+}

@@ -1,0 +1,12 @@
+[(#REM)Ne pas appliquer ce changement pour l'espace privé]
+[(#ENV{exec}|non)#SET{multi,_multi}]
+[<div class="formulaire_spip formulaire_menu_lang" id="formulaire_menu_lang">
+<form method="post" action="#"><div>
+	<select onchange="window.open(this.options#VAL{&#91;}this.selectedIndex#VAL{&#93;}.value,'_top')" name="menu_lang" id="menu_lang">
+		  (#INCLURE{fond=formulaires/inc-options-langues#GET{multi},env})
+	</select>
+	<noscript><p class="boutons"><input type="submit" class="submit" value="&gt;&gt;" /></p></noscript>
+</div></form>
+</div>]
+
+

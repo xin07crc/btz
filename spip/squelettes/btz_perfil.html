@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TYP">
+    <meta name="twitter:creator" content="@TYP">
+    <meta name="twitter:title" content="Test de privacidad">
+    <meta name="twitter:description" content="¿Porque es importante tu privacidad?">
+    <meta name="twitter:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg">
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="http://testdeprivacidad.com/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Test de privacidad" />
+    <meta property="og:description" content="¿Porque es importante tu privacidad?" />
+    <meta property="og:image" content="http://testdeprivacidad.com/test/test_ionic/www/img/fondos/sl_cookies_2400.jpg" />
+    <meta charset="UTF-8">
+    <title>betaCitizens</title>
+    <!-- ionic/angularjs js -->
+    <script src="test/test_ionic/www/lib/ionic/js/ionic.bundle.js"></script>
+    <!-- your app's js -->
+    <script src="test/test_ionic/www/js/angular/app.js"></script>
+    <!-- JS PROPIO -->
+    <script src="test/test_ionic/www/js/custom/js.js"></script>
+    <!-- HUELLA DIGITAL -->
+    <script src="test/test_ionic/www/lib/fingerprintjs2/fingerprint2.js"></script>
+    <!-- Libreria de angular gettext -->
+    <script src="test/test_ionic/www/lib/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script src="traducciones/js/traducciones.js"></script>
+    <!-- ANGULAR COOKIES -->
+    <script src="test/test_ionic/www/lib/angular-cookies/angular-cookies.js"></script>
+    <!-- ANGULAR LOCALSTORAGE -->
+    <script src="test/test_ionic/www/lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- Libreria sweet Alert 2 -->
+    <!-- for IE support -->
+    <script src="https://cdn.jsdelivr.net/es6-promise/latest/es6-promise.auto.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/node_modules/es6-promise/dist/es6-promise.min.js"></script>
+    <script src="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.js"></script>
+    <link rel="stylesheet" href="test/test_ionic/www/lib/sweetalert2/dist/sweetalert2.min.css">
+    <!-- Libreria Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- BOOTSTRAP -->
+    <link href="test/test_ionic/www/css/plantilla2/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="test/test_ionic/www/js/plantilla2/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/plantilla2/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="test/test_ionic/www/css/custom/style_new.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <script src="test/test_ionic/www/js/plantilla2/easyResponsiveTabs.js" type="text/javascript"></script>
+    <!-- Añadido Arraytofilter-->
+    <script src="test/test_ionic/www/lib/toArrayFilter/toArrayFilter.js"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="test/test_ionic/www/lib/font-awesome/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+            var parametros = getUrlVars();
+            if (parametros["token"]) {
+                document.cookie = "token=" + parametros["token"];
+            }
+            // Mostar el boton de modificar de cada una de las secciones
+            $(".div_mod").mouseenter(function () {
+                //$(this).find(".mod_bot").css("display", "block");
+            });
+            // Oculta el boton de modificar cuando sales del div
+            $(".div_mod").mouseleave(function () {
+                //$(this).find(".mod_bot").css("display", "none");
+            });
+            // Muestra el campo de modificacion
+            $(".boton_moficar").on('click', function () {
+                // console.log($(this).parent().parent().next());
+                $(this).parent().parent().parent().css("display", "none");
+                $(this).parent().parent().parent().next().css("display", "block");
+            });
+            // Cancelar input
+            $(".btn_cancelar").on('click', function () {
+                $(this).parent().css("display", "none");
+                $(this).parent().prev().css("display", "block");
+            })
+            // Guardar input
+            $(".btn_guardar").on('click', function () {
+                var input = $(this).prev().prev().prev();
+                // Compruebo si el input es un radio button
+                if (input["0"].type == "radio") {
+                    var id = input[0].id;
+                    var name = input[0].name;
+                    var myRadio = $('input[name=' + name + ']');
+                    var valor = myRadio.filter(':checked').val();
+                }
+                else {
+                    var id = input[0].id;
+                    var name = input[0].name;
+                    var valor = $("#" + id).val();
+                }
+                // Si no esta vacio paso al siguiente paso
+                if (valor != "") {
+                    $.post("test/test_ionic/www/php/modificar_psd.php", {id: id, name: name, valor: valor})
+                            .done(function (data) {
+                                data = JSON.parse(data);
+                                console.log(data);
+                                // Si no hay error
+                                if (data.error == false) {
+                                    // Muestro/Oculto las pantallas
+                                    $("#" + id).parent().css("display", "none");
+                                    $("#" + id).parent().prev().css("display", "block");
+                                    $("#" + id).parent().prev().find(".mod_real_valor").html(valor);
+                                }
+                                else {
+                                    // Mensaje de error
+                                    swal(
+                                            'Oops...',
+                                            'Algo malo ha pasado',
+                                            'error'
+                                    )
+                                }
+                            });
+                }
+
+            })
+            // Actualizar perfil
+            $("#actualizar_token").on('click', function () {
+                $.post("test/test_ionic/www/php/actualizar_token.php", {})
+                        .done(function (data) {
+                            console.log(data);
+                            data = JSON.parse(data);
+                            console.log(data);
+                            if (data.error == false) {
+                                $("#token_viejo").html(data.token_url);
+                            }
+                            else {
+
+                            }
+                        });
+            })
+            // Abrir lista de dispositivos
+            $("#btn_anadirDispositivo").on('click', function () {
+                $("#dispo_lista_div").toggle(500);
+                $("#btn_anadirDispositivo").toggle(500);
+            })
+            //
+            $("#dispo_next_so").on('click', function () {
+                // Id del dispositivo
+                var tipo = $("#dispo_lista option:selected").val();
+                // Envio a php el dispositivo
+                $.post("test/test_ionic/www/php/ver_version.php", {id: tipo}, function (data) {
+                    data = JSON.parse(data);
+                    if (data["error"] == false) {
+                        for (var i = 0; i < data.datos.length; i++) {
+                            // Completo el selectlist con los datos recogidos del servidor
+                            $('#dispo_so').append($('<option>', {
+                                value: data.datos[i].id,
+                                text: data.datos[i].nombre
+                            }));
+                        }
+                        $("#dispo_lista_div").toggle(500);
+                        $("#dispo_so_div").toggle(500);
+                    }
+                });
+            })
+            //
+            $("#dispo_next_version").on('click', function () {
+                // Id del dispositivo
+                var tipo = $("#dispo_so option:selected").val();
+                // Envio a php el dispositivo
+                $.post("test/test_ionic/www/php/ver_version.php", {id: tipo}, function (data) {
+                    data = JSON.parse(data);
+                    if (data["error"] == false) {
+                        for (var i = 0; i < data.datos.length; i++) {
+                            // Completo el selectlist con los datos recogidos del servidor
+                            $('#dispo_version').append($('<option>', {
+                                value: data.datos[i].nombre,
+                                text: data.datos[i].nombre
+                            }));
+                        }
+                        $("#dispo_so_div").toggle(500);
+                        $("#dispo_version_div").toggle(500);
+                    }
+                });
+            })
+            //
+            $("#dispo_next_marca").on('click', function () {
+                $("#dispo_marca_div").toggle(500);
+                $("#dispo_version_div").toggle(500);
+            })
+            //
+            $("#dispo_next_modelo").on('click', function () {
+                $("#dispo_marca_div").toggle(500);
+                $("#dispo_modelo_div").toggle(500);
+            })
+            // Boton de enviar
+            $("#dispo_next_fin").on('click', function () {
+                // Oculto los elementos del DOM
+                $("#dispo_modelo_div").toggle(500);
+                $("#btn_anadirDispositivo").toggle(500);
+                // Almaceno los datos
+                var tipo = $("#dispo_lista option:selected").text();
+                var so = $("#dispo_so option:selected").text();
+                var version = $("#dispo_version option:selected").text();
+                var marca = $("#dispo_marca").val();
+                var modelo = $("#dispo_modelo").val();
+                // Limpio los campos
+                //$('#dispo_lista').empty();
+                $('#dispo_so option').empty();
+                $('#dispo_version').empty();
+                $("#dispo_marca").empty();
+                $("#dispo_modelo").empty();
+                $.post("test/test_ionic/www/php/guardar_sociodemografico.php", {
+                    tipo: tipo,
+                    so: so,
+                    version: version,
+                    marca: marca,
+                    modelo: modelo
+                }, function (data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    if (data["error"] == false) {
+                        var id = data["id"];
+                        var div = "<div id='div-dispositivo-" + id + "' class='col-sm-12 col-md-12 col-lg-12'>";
+                        div += "<i onclick='borrar_dispositivo(" + id + ")' style='cursor: pointer' id='" + id + "' class='fa fa-trash-o borrar_dispo' aria-hidden='true'></i>" + tipo + ", " + marca + ", " + modelo + ", " + so + ", " + version;
+                        div += "</div>";
+                        $("#div-todos-dispo").append(div);
+                    }
+                    else {
+                        alert("Fallo");
+                    }
+                });
+            })
+        });
+        /**
+         * Obtiene las variables pasadas por get
+         */
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function(m,key,value) {
+                        vars[key] = value;
+                    });
+            return vars;
+        }
+        /**
+         *
+         * @param titulo
+         * @param texto
+         */
+        function abrir_popup(titulo_env, id_texto, logo_url) {
+            var pregunta = "<div class='contenedor-mas-huella texto-normal'>";
+            var imagen = "<div style='margin-bottom: 3%;'><img style='width: 46px' src='" + logo_url + "' alt='logo'></div>";
+            var texto = document.getElementById(id_texto).innerHTML;
+            //console.log(texto);
+            pregunta += texto;
+            pregunta += "</div>";
+            var titulo = imagen;
+            titulo += titulo_env;
+            swal({
+                title: titulo,
+                text: pregunta,
+                animation: false,
+            })
+        }
+
+        /**
+         *
+         * @param id_dispositivo
+         */
+        function borrar_dispositivo(id_dispositivo) {
+            var id_dispo = this.id;
+            $.post("test/test_ionic/www/php/borrar_sociodemografico.php", {
+                id_dispo: id_dispositivo,
+            }, function (data) {
+                // Parseo el JSON
+                data = JSON.parse(data);
+                // Compruebo errores
+                if (data["error"] == false) {
+                    // Elimino el DIV
+                    $("#div-dispositivo-" + id_dispositivo).remove();
+                }
+                else {
+                    alert("Fallo");
+                }
+
+            })
+        }
+    </script>
+    [(#INCLURE{fond=inclure/btz_script_htab})]
+    <style>
+        .negrita {
+            font-weight: bold;
+        }
+        .label-principal {
+            margin: 5px 0 10px 0;
+            font-size: 20px;
+        }
+        .label-container {
+            margin: 10px 0 10px 0;
+        }
+        .mod_bot {
+            /*display: none;*/
+        }
+        .boton_moficar {
+            cursor: pointer;
+        }
+        .div_input {
+            display: none;
+        }
+        .btn_mod {
+            padding: 5px 10px 5px 10px;
+            cursor: pointer;
+        }
+        .label-container {
+            /*font-size: 150%;*/
+        }
+        #div-todos-dispo {
+            margin-bottom: 15px;
+        }
+        #div-todos-dispo div {
+            padding-left: 0px;
+            margin-bottom: 5px;
+        }
+    </style>
+
+</head>
+<body id="internas" ng-app="starter" class="body-fondo-internas betatester" ng-controller="internas">
+<!-- test/test_ionic/www/img/seccion/   -->
+<!----start-header---->
+<div class="wrapper">
+    <!-- MENU -->
+    #CACHE{0}
+    #SET{'token', #EVAL{$_COOKIE["token"]}}
+
+    [(#INCLURE{fond=inclure/new_menu_superior}{token=#GET{'token'}})]
+    <!-- CONTAINER IMAGEN + TEXTO -->
+    <div class="main contenedor-titulo">
+        <div class="contenedor-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="container-fluid">
+                            <B_conseguirDatosUsuario>
+                                <div style="float: left; margin-top: 25px">
+                                <BOUCLE_conseguirDatosUsuario(registroreto){token=#GET{'token'}}>
+                                    #SET{'token_url', #TOKEN_URL}
+                                </BOUCLE_conseguirDatosUsuario>
+                            <BOUCLE_seccionPadre(RUBRIQUES){lang=#GLOBALS{'idioma'}}{par titre}{id_parent=0}>
+                            <BOUCLE_conseguirRubriques(RUBRIQUES){lang=#GLOBALS{'idioma'}}{id_parent=#ID_RUBRIQUE}>
+                            <BOUCLE_conseguirRubPC(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{id_mot=41}>
+                            <BOUCLE_conseguirTitulos(ARTICLES){id_rubrique=#ID_RUBRIQUE}>
+                                <!-- Texto descriptivo -->
+                                <div style="font-style: italic" class="col-sm-12 col-md-12 col-lg-12">
+                                    #TEXTE
+                                </div>
+                            </BOUCLE_conseguirTitulos>
+                            </BOUCLE_conseguirRubPC>
+                            </BOUCLE_conseguirRubriques>
+                            </BOUCLE_seccionPadre>
+                            <!-- TOKEN DE USUARIO -->
+                            <div class="label-principal col-sm-12 col-md-12 col-lg-12">
+                                <span class="titulo-main" translate>Datos del usuario</span>
+                            </div>
+                            <div class="label-container col-sm-12 col-md-12 col-lg-12">
+                                <span class="negrita" translate>User token id</span>
+                                <p>
+                                    <span id="token_viejo">#GET{'token_url'}</span>
+                                    <a href="#" id="actualizar_token" style="margin-left: 9px; cursor: pointer">
+                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    </a>
+                                </p>
+                            </div>
+                            <div style="margin-top: 15px; padding-left: 0px" class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="label-principal col-sm-12 col-md-12 col-lg-12">
+                                    <span class="titulo-main" translate>Socio-demográfico</span>
+                                </div>
+                                <BOUCLE_conseguirAutor(registroreto){token=#GET{'token'}}>
+                                    <B_conseguirFormulario>
+                                    <BOUCLE_conseguirFormulario(btz_perfilsdc){id_usuario=#ID_USUARIO}>
+                                        <!-- Muestra de FECHA -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                                <p class="mod_real">
+                                                    <span class="mod_bot">
+                                                        <span id="fecha_nacimiento" class="boton_moficar">
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="negrita" translate>Edad</span>
+                                                    </span>
+                                                    <span class="mod_real_valor">#AGERANGE</span>
+                                                </p>
+                                        </div>
+                                        <!-- Modificacion de FECHA -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Edad</span>
+                                            <br>
+                                            <select class="form-control" id="inpt_AgeRange" name="AgeRange">
+                                                <option selected value="" translate>Edad</option>
+                                                <option value="18-29" translate>18-29</option>
+                                                <option value="30-40" translate>30-40</option>
+                                                <option value="41-50" translate>41-50</option>
+                                                <option value="51-64" translate>51-64</option>
+                                                <option value="+65" translate>+65</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de GENERO -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="genero" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Genero</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#GENDER</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificacion de GENERO -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Genero</span>
+                                            <br>
+                                            <select id="inpt_Gender" name="Gender">
+                                                <option>Genero</option>
+                                                <option value="{{'Hombre'|translate}}" translate>Hombre</option>
+                                                <option value="{{'Mujer'|translate}}" translate>Mujer</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de GENERO -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="gender" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Pais</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#LOCATIONCOUNTRY</span>
+                                            </p>
+                                        </div>
+                                        <!-- MODIFICA PERFIL -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Pais</span>
+                                            <br>
+                                            <select class="form-control" id="inpt_LocationCountry" name="LocationCountry">
+                                                <option selected value="" translate>Pais</option>
+                                                <option value="es" translate>España</option>
+                                                <option value="fr" translate>Francia</option>
+                                                <option value="uk" translate>Reino Unido</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra Lengua materna -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="leng_materna" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Codigo postal</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#POSTALZIPCODE</span>
+                                            </p>
+
+                                        </div>
+                                        <!-- Modificacion de Lengua Materna -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Codigo postal</span>
+                                            <br>
+                                            <input class="form-control" type="text" name="PostalZipCode" id="inpt_PostalZipCode">
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de segunda lengua -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="leng_segund" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Nivel de estudios</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#LEVELSTUDIES</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificacion de Lengua Materna -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Nivel de estudios</span>
+                                            <br>
+                                            <select class="form-control" name="LevelStudies" id="inpt_LevelStudies">
+                                                <option selected value="" translate>Nivel de estudios</option>
+                                                <option value="{{'Primaria'|translate}}" translate>Primaria</option>
+                                                <option value="{{'Secundaria'|translate}}" translate>Secundaria</option>
+                                                <option value="{{'Universitarios'|translate}}" translate>Universitarios</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de codigo postal -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="cod_postal" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Estatus labolar</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#WORKINGSTATUS</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificacion de codigo Postal -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Estatus labolar</span>
+                                            <br>
+                                            <select class="form-control" name="WorkingStatus" id="inpt_WorkingStatus">
+                                                <option selected value="" translate>Estado de Trabajo</option>
+                                                <option value="{{'Estudiante'|translate}}" translate>Estudiante</option>
+                                                <option value="{{'Trabajando'|translate}}" translate>Trabajando</option>
+                                                <option value="{{'Desempleado'|translate}}" translate>Desempleado</option>
+                                                <option value="{{'Retirado'|translate}}" translate>Retirado</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muesta de estudios -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="estudios" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Estado civil</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#MARITALSTATUS</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar de estudios -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Estado civil</span>
+                                            <br>
+                                            <select class="form-control" name="MaritalStatus" id="inpt_MaritalStatus">
+                                                <option selected value="" translate>Estado de Trabajo</option>
+                                                <option value="{{'Soltero'|translate}}" translate>Soltero</option>
+                                                <option value="{{'Casado'|translate}}" translate>Casado</option>
+                                                <option value="{{'Relación'|translate}}" translate>Relación</option>
+                                                <option value="{{'Comprometido'|translate}}" translate>Comprometido</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de trabajo -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="trabaja" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Numero de hijos</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#NUMBEROFCHILDRENS</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar de TRABAJO @TODO: ERROR NO VA -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Numero de hijos</span>
+                                            <br>
+                                            <input type="number" min="0" step="1" name="NumberofChildrens" id="inpt_NumberofChildrens" >
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="mother_language" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Lengua materna</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#MOTHERTONGUE</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Lengua materna</span>
+                                            <br>
+                                            <select class="form-control" name="MotherTongue" id="inpt_MotherTongue">
+                                                <option selected value="" translate>Lengua materna</option>
+                                                <option value="{{'es'|translate}}" translate>Español</option>
+                                                <option value="{{'en'|translate}}" translate>Ingles</option>
+                                                <option value="{{'fr'|translate}}" translate>Frances</option>
+                                                <option value="{{'deu'|translate}}" translate>Aleman</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="second_language" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Segunda lengua</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#SECONDLANGUAGE</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Años de vida laboral</span>
+                                            <br>
+                                            <select class="form-control" name="SecondLanguage" id="inpt_SecondLanguage">
+                                                <option selected value="" translate>Segundo idioma</option>
+                                                <option value="{{'es'|translate}}" translate>Español</option>
+                                                <option value="{{'en'|translate}}" translate>Ingles</option>
+                                                <option value="{{'fr'|translate}}" translate>Frances</option>
+                                                <option value="{{'deu'|translate}}" translate>Aleman</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="first_interest" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Intereses</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#FIRSTINTEREST</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Años de vida laboral</span>
+                                            <br>
+                                            <select class="form-control" name="FirstInterest" required id="inpt_FirstInterest">
+                                                <option value="GOOGLE MAIN INTEREST LIST">GOOGLE MAIN INTEREST LIST</option>
+                                                <option value="YourInterest">YourInterest</option>
+                                                <option value="Accounting_FinanceJobs">Accounting_FinanceJobs</option>
+                                                <option value="ActionFigures">ActionFigures</option>
+                                                <option value="Acura">Acura</option>
+                                                <option value="Adoption">Adoption</option>
+                                                <option value="AdventureGames">AdventureGames</option>
+                                                <option value="AdventureTravel">AdventureTravel</option>
+                                                <option value="Advertising_Marketing">Advertising_Marketing</option>
+                                                <option value="AgriculturalEquipment">AgriculturalEquipment</option>
+                                                <option value="Agrochemicals">Agrochemicals</option>
+                                                <option value="AirTravel">AirTravel</option>
+                                                <option value="AmericanFootball">AmericanFootball</option>
+                                                <option value="AndroidApps">AndroidApps</option>
+                                                <option value="AndroidOS">AndroidOS</option>
+                                                <option value="AnimatedFilms">AnimatedFilms</option>
+                                                <option value="Anime_Manga">Anime_Manga</option>
+                                                <option value="Anthropology">Anthropology</option>
+                                                <option value="Apparel">Apparel</option>
+                                                <option value="AppleiOS">AppleiOS</option>
+                                                <option value="Architecture">Architecture</option>
+                                                <option value="Art_CraftSupplies">Art_CraftSupplies</option>
+                                                <option value="Arts_Entertainment">Arts_Entertainment</option>
+                                                <option value="ArtsEducation">ArtsEducation</option>
+                                                <option value="Astronomy">Astronomy</option>
+                                                <option value="AtmosphericScience">AtmosphericScience</option>
+                                                <option value="Auctions">Auctions</option>
+                                                <option value="Banking">Banking</option>
+                                                <option value="Baseball">Baseball</option>
+                                                <option value="Basketball">Basketball</option>
+                                                <option value="Beauty_Fitness">Beauty_Fitness</option>
+                                                <option value="Bentley">Bentley</option>
+                                                <option value="Beverages">Beverages</option>
+                                                <option value="BikeAccessories">BikeAccessories</option>
+                                                <option value="BiologicalSciences">BiologicalSciences</option>
+                                                <option value="BluetoothAccessories">BluetoothAccessories</option>
+                                                <option value="BoardGames">BoardGames</option>
+                                                <option value="Boating">Boating</option>
+                                                <option value="Bonds">Bonds</option>
+                                                <option value="Boots">Boots</option>
+                                                <option value="Bowling">Bowling</option>
+                                                <option value="Boxing">Boxing</option>
+                                                <option value="Burgers">Burgers</option>
+                                                <option value="Business_Industrial">Business_Industrial</option>
+                                                <option value="BusinessFinance">BusinessFinance</option>
+                                                <option value="BusinessNews">BusinessNews</option>
+                                                <option value="BusinessProcess">BusinessProcess</option>
+                                                <option value="BusinessServices">BusinessServices</option>
+                                                <option value="Butchers">Butchers</option>
+                                                <option value="CallingCards">CallingCards</option>
+                                                <option value="Camcorders">Camcorders</option>
+                                                <option value="Cameras">Cameras</option>
+                                                <option value="CarAudio">CarAudio</option>
+                                                <option value="CardGames">CardGames</option>
+                                                <option value="Cartoons">Cartoons</option>
+                                                <option value="Chemistry">Chemistry</option>
+                                                <option value="CityBuildingGames">CityBuildingGames</option>
+                                                <option value="CleaningAgents">CleaningAgents</option>
+                                                <option value="ClothingAccessories">ClothingAccessories</option>
+                                                <option value="Coffee">Coffee</option>
+                                                <option value="CombatSports">CombatSports</option>
+                                                <option value="ComedyFilms">ComedyFilms</option>
+                                                <option value="Comics">Comics</option>
+                                                <option value="CommercialVehicles">CommercialVehicles</option>
+                                                <option value="Computer_VideoGames">Computer_VideoGames</option>
+                                                <option value="ComputerHardware">ComputerHardware</option>
+                                                <option value="ComputerSecurity">ComputerSecurity</option>
+                                                <option value="Consulting">Consulting</option>
+                                                <option value="ConsumerElectronics">ConsumerElectronics</option>
+                                                <option value="CreditCards">CreditCards</option>
+                                                <option value="Cricket">Cricket</option>
+                                                <option value="Cuisines">Cuisines</option>
+                                                <option value="Cycling">Cycling</option>
+                                                <option value="Dance">Dance</option>
+                                                <option value="DevelopmentTools">DevelopmentTools</option>
+                                                <option value="DeviceDrivers">DeviceDrivers</option>
+                                                <option value="DiceGames">DiceGames</option>
+                                                <option value="Dishwashers">Dishwashers</option>
+                                                <option value="Dogs">Dogs</option>
+                                                <option value="DomesticServices">DomesticServices</option>
+                                                <option value="DramaFilms">DramaFilms</option>
+                                                <option value="Dresses">Dresses</option>
+                                                <option value="E-Books">E-Books</option>
+                                                <option value="E-CommerceServices">E-CommerceServices</option>
+                                                <option value="Economics">Economics</option>
+                                                <option value="EconomyNews">EconomyNews</option>
+                                                <option value="Education">Education</option>
+                                                <option value="EducationJobs">EducationJobs</option>
+                                                <option value="EmergencyServices">EmergencyServices</option>
+                                                <option value="EntertainmentIndustry">EntertainmentIndustry</option>
+                                                <option value="EventTicketSales">EventTicketSales</option>
+                                                <option value="ExtremeSports">ExtremeSports</option>
+                                                <option value="Family">Family</option>
+                                                <option value="Fashion_Style">Fashion_Style</option>
+                                                <option value="FashionModeling">FashionModeling</option>
+                                                <option value="FastFood">FastFood</option>
+                                                <option value="FilmFestivals">FilmFestivals</option>
+                                                <option value="Finance">Finance</option>
+                                                <option value="Fitness">Fitness</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Gardening_Landscaping">Gardening_Landscaping</option>
+                                                <option value="Generators">Generators</option>
+                                                <option value="Golf">Golf</option>
+                                                <option value="Government">Government</option>
+                                                <option value="GPS_Navigation">GPS_Navigation</option>
+                                                <option value="Guitars">Guitars</option>
+                                                <option value="Gymnastics">Gymnastics</option>
+                                                <option value="HairCare">HairCare</option>
+                                                <option value="Handball">Handball</option>
+                                                <option value="HDTVs">HDTVs</option>
+                                                <option value="Headphones">Headphones</option>
+                                                <option value="HealthInsurance">HealthInsurance</option>
+                                                <option value="Hockey">Hockey</option>
+                                                <option value="Home_Garden">Home_Garden</option>
+                                                <option value="HomeInsurance">HomeInsurance</option>
+                                                <option value="HospitalityIndustry">HospitalityIndustry</option>
+                                                <option value="HumanResources">HumanResources</option>
+                                                <option value="Humor">Humor</option>
+                                                <option value="IceSkating">IceSkating</option>
+                                                <option value="Insurance">Insurance</option>
+                                                <option value="InternetSoftware">InternetSoftware</option>
+                                                <option value="Internships">Internships</option>
+                                                <option value="Investing">Investing</option>
+                                                <option value="InvestmentBanking">InvestmentBanking</option>
+                                                <option value="iOSApps">iOSApps</option>
+                                                <option value="Jobs">Jobs</option>
+                                                <option value="KnowledgeManagement">KnowledgeManagement</option>
+                                                <option value="Laptops_Notebooks">Laptops_Notebooks</option>
+                                                <option value="Legal">Legal</option>
+                                                <option value="LegislativeBranch">LegislativeBranch</option>
+                                                <option value="Libraries">Libraries</option>
+                                                <option value="LifeInsurance">LifeInsurance</option>
+                                                <option value="Linux_Unix">Linux_Unix</option>
+                                                <option value="LiveComedy">LiveComedy</option>
+                                                <option value="MacOS">MacOS</option>
+                                                <option value="Magazines">Magazines</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="MediaPlayers">MediaPlayers</option>
+                                                <option value="Mergers_Acquisitions">Mergers_Acquisitions</option>
+                                                <option value="Military">Military</option>
+                                                <option value="MobilePhones">MobilePhones</option>
+                                                <option value="MotorSports">MotorSports</option>
+                                                <option value="Motorcycles">Motorcycles</option>
+                                                <option value="Movies">Movies</option>
+                                                <option value="Museums">Museums</option>
+                                                <option value="Music_Audio">Music_Audio</option>
+                                                <option value="MusicVideos">MusicVideos</option>
+                                                <option value="NetworkSecurity">NetworkSecurity</option>
+                                                <option value="Networking">Networking</option>
+                                                <option value="News">News</option>
+                                                <option value="Newspapers">Newspapers</option>
+                                                <option value="Nintendo">Nintendo</option>
+                                                <option value="OfficeServices">OfficeServices</option>
+                                                <option value="OnlineCommunities">OnlineCommunities</option>
+                                                <option value="OnlineGames">OnlineGames</option>
+                                                <option value="OnlineVideo">OnlineVideo</option>
+                                                <option value="Paintball">Paintball</option>
+                                                <option value="Sunglasses">Sunglasses</option>
+                                                <option value="SupplyChainManagement">SupplyChainManagement</option>
+                                                <option value="Surfing">Surfing</option>
+                                                <option value="Swimming">Swimming</option>
+                                                <option value="T-Shirts">T-Shirts</option>
+                                                <option value="TableGames">TableGames</option>
+                                                <option value="TechnologyNews">TechnologyNews</option>
+                                                <option value="Telemarketing">Telemarketing</option>
+                                                <option value="Televisions">Televisions</option>
+                                                <option value="Tennis">Tennis</option>
+                                                <option value="TouristDestinations">TouristDestinations</option>
+                                                <option value="Toys">Toys</option>
+                                                <option value="Travel">Travel</option>
+                                                <option value="TravelInsurance">TravelInsurance</option>
+                                                <option value="Trucks">Trucks</option>
+                                                <option value="TVRealityShows">TVRealityShows</option>
+                                                <option value="VehicleInsurance">VehicleInsurance</option>
+                                                <option value="VideoSharing">VideoSharing</option>
+                                                <option value="Volleyball">Volleyball</option>
+                                                <option value="Warehousing">Warehousing</option>
+                                                <option value="Weather">Weather</option>
+                                                <option value="WebPortals">WebPortals</option>
+                                                <option value="WebServices">WebServices</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="second_interest" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Segundo interes</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#SECONDINTEREST</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Años de vida laboral</span>
+                                            <br>
+                                            <select class="form-control" name="SecondInterest" id="inpt_SecondInterest">
+                                                <option value="GOOGLE MAIN INTEREST LIST">GOOGLE MAIN INTEREST LIST</option>
+                                                <option value="YourInterest">YourInterest</option>
+                                                <option value="Accounting_FinanceJobs">Accounting_FinanceJobs</option>
+                                                <option value="ActionFigures">ActionFigures</option>
+                                                <option value="Acura">Acura</option>
+                                                <option value="Adoption">Adoption</option>
+                                                <option value="AdventureGames">AdventureGames</option>
+                                                <option value="AdventureTravel">AdventureTravel</option>
+                                                <option value="Advertising_Marketing">Advertising_Marketing</option>
+                                                <option value="AgriculturalEquipment">AgriculturalEquipment</option>
+                                                <option value="Agrochemicals">Agrochemicals</option>
+                                                <option value="AirTravel">AirTravel</option>
+                                                <option value="AmericanFootball">AmericanFootball</option>
+                                                <option value="AndroidApps">AndroidApps</option>
+                                                <option value="AndroidOS">AndroidOS</option>
+                                                <option value="AnimatedFilms">AnimatedFilms</option>
+                                                <option value="Anime_Manga">Anime_Manga</option>
+                                                <option value="Anthropology">Anthropology</option>
+                                                <option value="Apparel">Apparel</option>
+                                                <option value="AppleiOS">AppleiOS</option>
+                                                <option value="Architecture">Architecture</option>
+                                                <option value="Art_CraftSupplies">Art_CraftSupplies</option>
+                                                <option value="Arts_Entertainment">Arts_Entertainment</option>
+                                                <option value="ArtsEducation">ArtsEducation</option>
+                                                <option value="Astronomy">Astronomy</option>
+                                                <option value="AtmosphericScience">AtmosphericScience</option>
+                                                <option value="Auctions">Auctions</option>
+                                                <option value="Banking">Banking</option>
+                                                <option value="Baseball">Baseball</option>
+                                                <option value="Basketball">Basketball</option>
+                                                <option value="Beauty_Fitness">Beauty_Fitness</option>
+                                                <option value="Bentley">Bentley</option>
+                                                <option value="Beverages">Beverages</option>
+                                                <option value="BikeAccessories">BikeAccessories</option>
+                                                <option value="BiologicalSciences">BiologicalSciences</option>
+                                                <option value="BluetoothAccessories">BluetoothAccessories</option>
+                                                <option value="BoardGames">BoardGames</option>
+                                                <option value="Boating">Boating</option>
+                                                <option value="Bonds">Bonds</option>
+                                                <option value="Boots">Boots</option>
+                                                <option value="Bowling">Bowling</option>
+                                                <option value="Boxing">Boxing</option>
+                                                <option value="Burgers">Burgers</option>
+                                                <option value="Business_Industrial">Business_Industrial</option>
+                                                <option value="BusinessFinance">BusinessFinance</option>
+                                                <option value="BusinessNews">BusinessNews</option>
+                                                <option value="BusinessProcess">BusinessProcess</option>
+                                                <option value="BusinessServices">BusinessServices</option>
+                                                <option value="Butchers">Butchers</option>
+                                                <option value="CallingCards">CallingCards</option>
+                                                <option value="Camcorders">Camcorders</option>
+                                                <option value="Cameras">Cameras</option>
+                                                <option value="CarAudio">CarAudio</option>
+                                                <option value="CardGames">CardGames</option>
+                                                <option value="Cartoons">Cartoons</option>
+                                                <option value="Chemistry">Chemistry</option>
+                                                <option value="CityBuildingGames">CityBuildingGames</option>
+                                                <option value="CleaningAgents">CleaningAgents</option>
+                                                <option value="ClothingAccessories">ClothingAccessories</option>
+                                                <option value="Coffee">Coffee</option>
+                                                <option value="CombatSports">CombatSports</option>
+                                                <option value="ComedyFilms">ComedyFilms</option>
+                                                <option value="Comics">Comics</option>
+                                                <option value="CommercialVehicles">CommercialVehicles</option>
+                                                <option value="Computer_VideoGames">Computer_VideoGames</option>
+                                                <option value="ComputerHardware">ComputerHardware</option>
+                                                <option value="ComputerSecurity">ComputerSecurity</option>
+                                                <option value="Consulting">Consulting</option>
+                                                <option value="ConsumerElectronics">ConsumerElectronics</option>
+                                                <option value="CreditCards">CreditCards</option>
+                                                <option value="Cricket">Cricket</option>
+                                                <option value="Cuisines">Cuisines</option>
+                                                <option value="Cycling">Cycling</option>
+                                                <option value="Dance">Dance</option>
+                                                <option value="DevelopmentTools">DevelopmentTools</option>
+                                                <option value="DeviceDrivers">DeviceDrivers</option>
+                                                <option value="DiceGames">DiceGames</option>
+                                                <option value="Dishwashers">Dishwashers</option>
+                                                <option value="Dogs">Dogs</option>
+                                                <option value="DomesticServices">DomesticServices</option>
+                                                <option value="DramaFilms">DramaFilms</option>
+                                                <option value="Dresses">Dresses</option>
+                                                <option value="E-Books">E-Books</option>
+                                                <option value="E-CommerceServices">E-CommerceServices</option>
+                                                <option value="Economics">Economics</option>
+                                                <option value="EconomyNews">EconomyNews</option>
+                                                <option value="Education">Education</option>
+                                                <option value="EducationJobs">EducationJobs</option>
+                                                <option value="EmergencyServices">EmergencyServices</option>
+                                                <option value="EntertainmentIndustry">EntertainmentIndustry</option>
+                                                <option value="EventTicketSales">EventTicketSales</option>
+                                                <option value="ExtremeSports">ExtremeSports</option>
+                                                <option value="Family">Family</option>
+                                                <option value="Fashion_Style">Fashion_Style</option>
+                                                <option value="FashionModeling">FashionModeling</option>
+                                                <option value="FastFood">FastFood</option>
+                                                <option value="FilmFestivals">FilmFestivals</option>
+                                                <option value="Finance">Finance</option>
+                                                <option value="Fitness">Fitness</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Gardening_Landscaping">Gardening_Landscaping</option>
+                                                <option value="Generators">Generators</option>
+                                                <option value="Golf">Golf</option>
+                                                <option value="Government">Government</option>
+                                                <option value="GPS_Navigation">GPS_Navigation</option>
+                                                <option value="Guitars">Guitars</option>
+                                                <option value="Gymnastics">Gymnastics</option>
+                                                <option value="HairCare">HairCare</option>
+                                                <option value="Handball">Handball</option>
+                                                <option value="HDTVs">HDTVs</option>
+                                                <option value="Headphones">Headphones</option>
+                                                <option value="HealthInsurance">HealthInsurance</option>
+                                                <option value="Hockey">Hockey</option>
+                                                <option value="Home_Garden">Home_Garden</option>
+                                                <option value="HomeInsurance">HomeInsurance</option>
+                                                <option value="HospitalityIndustry">HospitalityIndustry</option>
+                                                <option value="HumanResources">HumanResources</option>
+                                                <option value="Humor">Humor</option>
+                                                <option value="IceSkating">IceSkating</option>
+                                                <option value="Insurance">Insurance</option>
+                                                <option value="InternetSoftware">InternetSoftware</option>
+                                                <option value="Internships">Internships</option>
+                                                <option value="Investing">Investing</option>
+                                                <option value="InvestmentBanking">InvestmentBanking</option>
+                                                <option value="iOSApps">iOSApps</option>
+                                                <option value="Jobs">Jobs</option>
+                                                <option value="KnowledgeManagement">KnowledgeManagement</option>
+                                                <option value="Laptops_Notebooks">Laptops_Notebooks</option>
+                                                <option value="Legal">Legal</option>
+                                                <option value="LegislativeBranch">LegislativeBranch</option>
+                                                <option value="Libraries">Libraries</option>
+                                                <option value="LifeInsurance">LifeInsurance</option>
+                                                <option value="Linux_Unix">Linux_Unix</option>
+                                                <option value="LiveComedy">LiveComedy</option>
+                                                <option value="MacOS">MacOS</option>
+                                                <option value="Magazines">Magazines</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="MediaPlayers">MediaPlayers</option>
+                                                <option value="Mergers_Acquisitions">Mergers_Acquisitions</option>
+                                                <option value="Military">Military</option>
+                                                <option value="MobilePhones">MobilePhones</option>
+                                                <option value="MotorSports">MotorSports</option>
+                                                <option value="Motorcycles">Motorcycles</option>
+                                                <option value="Movies">Movies</option>
+                                                <option value="Museums">Museums</option>
+                                                <option value="Music_Audio">Music_Audio</option>
+                                                <option value="MusicVideos">MusicVideos</option>
+                                                <option value="NetworkSecurity">NetworkSecurity</option>
+                                                <option value="Networking">Networking</option>
+                                                <option value="News">News</option>
+                                                <option value="Newspapers">Newspapers</option>
+                                                <option value="Nintendo">Nintendo</option>
+                                                <option value="OfficeServices">OfficeServices</option>
+                                                <option value="OnlineCommunities">OnlineCommunities</option>
+                                                <option value="OnlineGames">OnlineGames</option>
+                                                <option value="OnlineVideo">OnlineVideo</option>
+                                                <option value="Paintball">Paintball</option>
+                                                <option value="Sunglasses">Sunglasses</option>
+                                                <option value="SupplyChainManagement">SupplyChainManagement</option>
+                                                <option value="Surfing">Surfing</option>
+                                                <option value="Swimming">Swimming</option>
+                                                <option value="T-Shirts">T-Shirts</option>
+                                                <option value="TableGames">TableGames</option>
+                                                <option value="TechnologyNews">TechnologyNews</option>
+                                                <option value="Telemarketing">Telemarketing</option>
+                                                <option value="Televisions">Televisions</option>
+                                                <option value="Tennis">Tennis</option>
+                                                <option value="TouristDestinations">TouristDestinations</option>
+                                                <option value="Toys">Toys</option>
+                                                <option value="Travel">Travel</option>
+                                                <option value="TravelInsurance">TravelInsurance</option>
+                                                <option value="Trucks">Trucks</option>
+                                                <option value="TVRealityShows">TVRealityShows</option>
+                                                <option value="VehicleInsurance">VehicleInsurance</option>
+                                                <option value="VideoSharing">VideoSharing</option>
+                                                <option value="Volleyball">Volleyball</option>
+                                                <option value="Warehousing">Warehousing</option>
+                                                <option value="Weather">Weather</option>
+                                                <option value="WebPortals">WebPortals</option>
+                                                <option value="WebServices">WebServices</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="third_interest" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Tercer interes</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#THIRDINTEREST</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Años de vida laboral</span>
+                                            <br>
+                                            <select class="form-control" name="ThirdInterest" id="inpt_ThirdInterest">
+                                                <option value="GOOGLE MAIN INTEREST LIST">GOOGLE MAIN INTEREST LIST</option>
+                                                <option value="YourInterest">YourInterest</option>
+                                                <option value="Accounting_FinanceJobs">Accounting_FinanceJobs</option>
+                                                <option value="ActionFigures">ActionFigures</option>
+                                                <option value="Acura">Acura</option>
+                                                <option value="Adoption">Adoption</option>
+                                                <option value="AdventureGames">AdventureGames</option>
+                                                <option value="AdventureTravel">AdventureTravel</option>
+                                                <option value="Advertising_Marketing">Advertising_Marketing</option>
+                                                <option value="AgriculturalEquipment">AgriculturalEquipment</option>
+                                                <option value="Agrochemicals">Agrochemicals</option>
+                                                <option value="AirTravel">AirTravel</option>
+                                                <option value="AmericanFootball">AmericanFootball</option>
+                                                <option value="AndroidApps">AndroidApps</option>
+                                                <option value="AndroidOS">AndroidOS</option>
+                                                <option value="AnimatedFilms">AnimatedFilms</option>
+                                                <option value="Anime_Manga">Anime_Manga</option>
+                                                <option value="Anthropology">Anthropology</option>
+                                                <option value="Apparel">Apparel</option>
+                                                <option value="AppleiOS">AppleiOS</option>
+                                                <option value="Architecture">Architecture</option>
+                                                <option value="Art_CraftSupplies">Art_CraftSupplies</option>
+                                                <option value="Arts_Entertainment">Arts_Entertainment</option>
+                                                <option value="ArtsEducation">ArtsEducation</option>
+                                                <option value="Astronomy">Astronomy</option>
+                                                <option value="AtmosphericScience">AtmosphericScience</option>
+                                                <option value="Auctions">Auctions</option>
+                                                <option value="Banking">Banking</option>
+                                                <option value="Baseball">Baseball</option>
+                                                <option value="Basketball">Basketball</option>
+                                                <option value="Beauty_Fitness">Beauty_Fitness</option>
+                                                <option value="Bentley">Bentley</option>
+                                                <option value="Beverages">Beverages</option>
+                                                <option value="BikeAccessories">BikeAccessories</option>
+                                                <option value="BiologicalSciences">BiologicalSciences</option>
+                                                <option value="BluetoothAccessories">BluetoothAccessories</option>
+                                                <option value="BoardGames">BoardGames</option>
+                                                <option value="Boating">Boating</option>
+                                                <option value="Bonds">Bonds</option>
+                                                <option value="Boots">Boots</option>
+                                                <option value="Bowling">Bowling</option>
+                                                <option value="Boxing">Boxing</option>
+                                                <option value="Burgers">Burgers</option>
+                                                <option value="Business_Industrial">Business_Industrial</option>
+                                                <option value="BusinessFinance">BusinessFinance</option>
+                                                <option value="BusinessNews">BusinessNews</option>
+                                                <option value="BusinessProcess">BusinessProcess</option>
+                                                <option value="BusinessServices">BusinessServices</option>
+                                                <option value="Butchers">Butchers</option>
+                                                <option value="CallingCards">CallingCards</option>
+                                                <option value="Camcorders">Camcorders</option>
+                                                <option value="Cameras">Cameras</option>
+                                                <option value="CarAudio">CarAudio</option>
+                                                <option value="CardGames">CardGames</option>
+                                                <option value="Cartoons">Cartoons</option>
+                                                <option value="Chemistry">Chemistry</option>
+                                                <option value="CityBuildingGames">CityBuildingGames</option>
+                                                <option value="CleaningAgents">CleaningAgents</option>
+                                                <option value="ClothingAccessories">ClothingAccessories</option>
+                                                <option value="Coffee">Coffee</option>
+                                                <option value="CombatSports">CombatSports</option>
+                                                <option value="ComedyFilms">ComedyFilms</option>
+                                                <option value="Comics">Comics</option>
+                                                <option value="CommercialVehicles">CommercialVehicles</option>
+                                                <option value="Computer_VideoGames">Computer_VideoGames</option>
+                                                <option value="ComputerHardware">ComputerHardware</option>
+                                                <option value="ComputerSecurity">ComputerSecurity</option>
+                                                <option value="Consulting">Consulting</option>
+                                                <option value="ConsumerElectronics">ConsumerElectronics</option>
+                                                <option value="CreditCards">CreditCards</option>
+                                                <option value="Cricket">Cricket</option>
+                                                <option value="Cuisines">Cuisines</option>
+                                                <option value="Cycling">Cycling</option>
+                                                <option value="Dance">Dance</option>
+                                                <option value="DevelopmentTools">DevelopmentTools</option>
+                                                <option value="DeviceDrivers">DeviceDrivers</option>
+                                                <option value="DiceGames">DiceGames</option>
+                                                <option value="Dishwashers">Dishwashers</option>
+                                                <option value="Dogs">Dogs</option>
+                                                <option value="DomesticServices">DomesticServices</option>
+                                                <option value="DramaFilms">DramaFilms</option>
+                                                <option value="Dresses">Dresses</option>
+                                                <option value="E-Books">E-Books</option>
+                                                <option value="E-CommerceServices">E-CommerceServices</option>
+                                                <option value="Economics">Economics</option>
+                                                <option value="EconomyNews">EconomyNews</option>
+                                                <option value="Education">Education</option>
+                                                <option value="EducationJobs">EducationJobs</option>
+                                                <option value="EmergencyServices">EmergencyServices</option>
+                                                <option value="EntertainmentIndustry">EntertainmentIndustry</option>
+                                                <option value="EventTicketSales">EventTicketSales</option>
+                                                <option value="ExtremeSports">ExtremeSports</option>
+                                                <option value="Family">Family</option>
+                                                <option value="Fashion_Style">Fashion_Style</option>
+                                                <option value="FashionModeling">FashionModeling</option>
+                                                <option value="FastFood">FastFood</option>
+                                                <option value="FilmFestivals">FilmFestivals</option>
+                                                <option value="Finance">Finance</option>
+                                                <option value="Fitness">Fitness</option>
+                                                <option value="Food">Food</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Gardening_Landscaping">Gardening_Landscaping</option>
+                                                <option value="Generators">Generators</option>
+                                                <option value="Golf">Golf</option>
+                                                <option value="Government">Government</option>
+                                                <option value="GPS_Navigation">GPS_Navigation</option>
+                                                <option value="Guitars">Guitars</option>
+                                                <option value="Gymnastics">Gymnastics</option>
+                                                <option value="HairCare">HairCare</option>
+                                                <option value="Handball">Handball</option>
+                                                <option value="HDTVs">HDTVs</option>
+                                                <option value="Headphones">Headphones</option>
+                                                <option value="HealthInsurance">HealthInsurance</option>
+                                                <option value="Hockey">Hockey</option>
+                                                <option value="Home_Garden">Home_Garden</option>
+                                                <option value="HomeInsurance">HomeInsurance</option>
+                                                <option value="HospitalityIndustry">HospitalityIndustry</option>
+                                                <option value="HumanResources">HumanResources</option>
+                                                <option value="Humor">Humor</option>
+                                                <option value="IceSkating">IceSkating</option>
+                                                <option value="Insurance">Insurance</option>
+                                                <option value="InternetSoftware">InternetSoftware</option>
+                                                <option value="Internships">Internships</option>
+                                                <option value="Investing">Investing</option>
+                                                <option value="InvestmentBanking">InvestmentBanking</option>
+                                                <option value="iOSApps">iOSApps</option>
+                                                <option value="Jobs">Jobs</option>
+                                                <option value="KnowledgeManagement">KnowledgeManagement</option>
+                                                <option value="Laptops_Notebooks">Laptops_Notebooks</option>
+                                                <option value="Legal">Legal</option>
+                                                <option value="LegislativeBranch">LegislativeBranch</option>
+                                                <option value="Libraries">Libraries</option>
+                                                <option value="LifeInsurance">LifeInsurance</option>
+                                                <option value="Linux_Unix">Linux_Unix</option>
+                                                <option value="LiveComedy">LiveComedy</option>
+                                                <option value="MacOS">MacOS</option>
+                                                <option value="Magazines">Magazines</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="MediaPlayers">MediaPlayers</option>
+                                                <option value="Mergers_Acquisitions">Mergers_Acquisitions</option>
+                                                <option value="Military">Military</option>
+                                                <option value="MobilePhones">MobilePhones</option>
+                                                <option value="MotorSports">MotorSports</option>
+                                                <option value="Motorcycles">Motorcycles</option>
+                                                <option value="Movies">Movies</option>
+                                                <option value="Museums">Museums</option>
+                                                <option value="Music_Audio">Music_Audio</option>
+                                                <option value="MusicVideos">MusicVideos</option>
+                                                <option value="NetworkSecurity">NetworkSecurity</option>
+                                                <option value="Networking">Networking</option>
+                                                <option value="News">News</option>
+                                                <option value="Newspapers">Newspapers</option>
+                                                <option value="Nintendo">Nintendo</option>
+                                                <option value="OfficeServices">OfficeServices</option>
+                                                <option value="OnlineCommunities">OnlineCommunities</option>
+                                                <option value="OnlineGames">OnlineGames</option>
+                                                <option value="OnlineVideo">OnlineVideo</option>
+                                                <option value="Paintball">Paintball</option>
+                                                <option value="Sunglasses">Sunglasses</option>
+                                                <option value="SupplyChainManagement">SupplyChainManagement</option>
+                                                <option value="Surfing">Surfing</option>
+                                                <option value="Swimming">Swimming</option>
+                                                <option value="T-Shirts">T-Shirts</option>
+                                                <option value="TableGames">TableGames</option>
+                                                <option value="TechnologyNews">TechnologyNews</option>
+                                                <option value="Telemarketing">Telemarketing</option>
+                                                <option value="Televisions">Televisions</option>
+                                                <option value="Tennis">Tennis</option>
+                                                <option value="TouristDestinations">TouristDestinations</option>
+                                                <option value="Toys">Toys</option>
+                                                <option value="Travel">Travel</option>
+                                                <option value="TravelInsurance">TravelInsurance</option>
+                                                <option value="Trucks">Trucks</option>
+                                                <option value="TVRealityShows">TVRealityShows</option>
+                                                <option value="VehicleInsurance">VehicleInsurance</option>
+                                                <option value="VideoSharing">VideoSharing</option>
+                                                <option value="Volleyball">Volleyball</option>
+                                                <option value="Warehousing">Warehousing</option>
+                                                <option value="Weather">Weather</option>
+                                                <option value="WebPortals">WebPortals</option>
+                                                <option value="WebServices">WebServices</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                        <!-- Muestra de vida laboral -->
+                                        <div class="label-container div_mod col-sm-12 col-md-12 col-lg-12">
+                                            <p class="mod_real">
+                                                <span class="mod_bot">
+                                                    <span id="fourth_interest" class="boton_moficar">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        <span class="negrita" translate>Cuarto interes</span>
+                                                    </span>
+                                                </span>
+                                                <span class="mod_real_valor">#FOURTHINTEREST</span>
+                                            </p>
+                                        </div>
+                                        <!-- Modificar vida laboral -->
+                                        <div class="label-container div_input col-sm-12 col-md-12 col-lg-12">
+                                            <span class="negrita" translate>Años de vida laboral</span>
+                                            <br>
+                                            <select class="form-control" name="FourthInterest" id="inpt_FourthInterest">
+                                                <option selected translate>Escoje un interes</option>
+                                                <option translate value="{{'Contabilidad y Finanzas Empleos'|translate}}">Contabilidad y Finanzas Empleos</option>
+                                                <option translate value="{{'Figuras de accion'|translate}}">Figuras de accion</option>
+                                                <option translate value="{{'Acura'|translate}}">Acura</option>
+                                                <option translate value="{{'Adopcion'|translate}}">Adopcion</option>
+                                                <option translate value="{{'Juegos de aventura'|translate}}">Juegos de aventura</option>
+                                                <option translate value="{{'Viaje de aventura'|translate}}">Viaje de aventura</option>
+                                                <option translate value="{{'Publicidad y Marketing'|translate}}">Publicidad y Marketing</option>
+                                                <option translate value="{{'Equipo Agricola'|translate}}">Equipo Agricola</option>
+                                                <option translate value="{{'Agroquimicos'|translate}}">Agroquimicos</option>
+                                                <option translate value="{{'Viaje aereo'|translate}}">Viaje aereo</option>
+                                                <option translate value="{{'Futbol americano'|translate}}">Futbol americano</option>
+                                                <option translate value="{{'Aplicaciones Android'|translate}}">Aplicaciones Android</option>
+                                                <option translate value="{{'Android OS'|translate}}">Android OS</option>
+                                                <option translate value="{{'Peliculas de animacion'|translate}}">Peliculas de animacion</option>
+                                                <option translate value="{{'Anime'|translate}}">Anime</option>
+                                                <option translate value="{{'Antropologia'|translate}}">Antropologia</option>
+                                                <option translate value="{{'Ropa'|translate}}">Ropa</option>
+                                                <option translate value="{{'Apple iOS'|translate}}">Apple iOS</option>
+                                                <option translate value="{{'Arquitectura'|translate}}">Arquitectura</option>
+                                                <option translate value="{{'Calendarios'|translate}}">Calendarios</option>
+                                                <option translate value="{{'Arte y Entretenimiento'|translate}}">Arte y Entretenimiento</option>
+                                                <option translate value="{{'Educacion de Arte'|translate}}">Educacion de Arte</option>
+                                                <option translate value="{{'Astronomia'|translate}}">Astronomia</option>
+                                                <option translate value="{{'Ciencias Atmosfericas'|translate}}">Ciencias Atmosfericas</option>
+                                                <option translate value="{{'Subastas'|translate}}">Subastas</option>
+                                                <option translate value="{{'Banca'|translate}}">Banca</option>
+                                                <option translate value="{{'Beisbol'|translate}}">Beisbol</option>
+                                                <option translate value="{{'Baloncesto'|translate}}">Baloncesto</option>
+                                                <option translate value="{{'Belleza y Vida Sana'|translate}}">Belleza y Vida Sana</option>
+                                                <option translate value="{{'Bentley'|translate}}">Bentley</option>
+                                                <option translate value="{{'Bebidas'|translate}}">Bebidas</option>
+                                                <option translate value="{{'Accesorios de Bicicleta'|translate}}">Accesorios de Bicicleta</option>
+                                                <option translate value="{{'Ciencias Biologicas'|translate}}">Ciencias Biologicas</option>
+                                                <option translate value="{{'Accesorios Bluetooth'|translate}}">Accesorios Bluetooth</option>
+                                                <option translate value="{{'Juegos de mesa'|translate}}">Juegos de mesa</option>
+                                                <option translate value="{{'Canotaje'|translate}}">Canotaje</option>
+                                                <option translate value="{{'Bonos'|translate}}">Bonos</option>
+                                                <option translate value="{{'Botas'|translate}}">Botas</option>
+                                                <option translate value="{{'Bowling'|translate}}">Bowling</option>
+                                                <option translate value="{{'Boxeo'|translate}}">Boxeo</option>
+                                                <option translate value="{{'Hamburguesas'|translate}}">Hamburguesas</option>
+                                                <option translate value="{{'Business &amp; Industrial'|translate}}">Business &amp; Industrial</option>
+                                                <option translate value="{{'Financiacion de las empresas'|translate}}">Financiacion de las empresas</option>
+                                                <option translate value="{{'Noticias de negocios'|translate}}">Noticias de negocios</option>
+                                                <option translate value="{{'Procesos de negocio'|translate}}">Procesos de negocio</option>
+                                                <option translate value="{{'Servicios de negocios'|translate}}">Servicios de negocios</option>
+                                                <option translate value="{{'Carnicerias'|translate}}">Carnicerias</option>
+                                                <option translate value="{{'Tarjetas Telefonicas'|translate}}">Tarjetas Telefonicas</option>
+                                                <option translate value="{{'Videocamaras'|translate}}">Videocamaras</option>
+                                                <option translate value="{{'Camaras'|translate}}">Camaras</option>
+                                                <option translate value="{{'Car Audio'|translate}}">Car Audio</option>
+                                                <option translate value="{{'Juegos de cartas'|translate}}">Juegos de cartas</option>
+                                                <option translate value="{{'Dibujos animados'|translate}}">Dibujos animados</option>
+                                                <option translate value="{{'Quimica'|translate}}">Quimica</option>
+                                                <option translate value="{{'Construccion de la Ciudad Juegos'|translate}}">Construccion de la Ciudad Juegos</option>
+                                                <option translate value="{{'Agentes de limpieza'|translate}}">Agentes de limpieza</option>
+                                                <option translate value="{{'Ropa y Accesorios'|translate}}">Ropa y Accesorios</option>
+                                                <option translate value="{{'Cafe'|translate}}">Cafe</option>
+                                                <option translate value="{{'Deportes de combate'|translate}}">Deportes de combate</option>
+                                                <option translate value="{{'Peliculas comicas'|translate}}">Peliculas comicas</option>
+                                                <option translate value="{{'Comics'|translate}}">Comics</option>
+                                                <option translate value="{{'Vehiculos comerciales'|translate}}">Vehiculos comerciales</option>
+                                                <option translate value="{{'Informatica y videojuegos'|translate}}">Informatica y videojuegos</option>
+                                                <option translate value="{{'Hardware de la computadora'|translate}}">Hardware de la computadora</option>
+                                                <option translate value="{{'Seguridad Informatica'|translate}}">Seguridad Informatica</option>
+                                                <option translate value="{{'Asesoramiento'|translate}}">Asesoramiento</option>
+                                                <option translate value="{{'Electronica de consumo'|translate}}">Electronica de consumo</option>
+                                                <option translate value="{{'Tarjetas de credito'|translate}}">Tarjetas de credito</option>
+                                                <option translate value="{{'Cricket'|translate}}">Cricket</option>
+                                                <option translate value="{{'Cocina'|translate}}">Cocina</option>
+                                                <option translate value="{{'Ciclismo'|translate}}">Ciclismo</option>
+                                                <option translate value="{{'Baile'|translate}}">Baile</option>
+                                                <option translate value="{{'Herramientas de desarrollo'|translate}}">Herramientas de desarrollo</option>
+                                                <option translate value="{{'Controladores de dispositivo'|translate}}">Controladores de dispositivo</option>
+                                                <option translate value="{{'Juegos de los dados'|translate}}">Juegos de los dados</option>
+                                                <option translate value="{{'Lavavajillas'|translate}}">Lavavajillas</option>
+                                                <option translate value="{{'Perros'|translate}}">Perros</option>
+                                                <option translate value="{{'Servicios Domesticos'|translate}}">Servicios Domesticos</option>
+                                                <option translate value="{{'Peliculas de Drama'|translate}}">Peliculas de Drama</option>
+                                                <option translate value="{{'Vestidos'|translate}}">Vestidos</option>
+                                                <option translate value="{{'E-Books'|translate}}">E-Books</option>
+                                                <option translate value="{{'Comercio Electronico'|translate}}">Comercio Electronico</option>
+                                                <option translate value="{{'Economia'|translate}}">Economia</option>
+                                                <option translate value="{{'Economia Noticias'|translate}}">Economia Noticias</option>
+                                                <option translate value="{{'Educacion'|translate}}">Educacion</option>
+                                                <option translate value="{{'Educacion Empleos'|translate}}">Educacion Empleos</option>
+                                                <option translate value="{{'Servicio de emergencia'|translate}}">Servicio de emergencia</option>
+                                                <option translate value="{{'Industria del entretenimiento'|translate}}">Industria del entretenimiento</option>
+                                                <option translate value="{{'Venta de entradas de eventos'|translate}}">Venta de entradas de eventos</option>
+                                                <option translate value="{{'Deportes extremos'|translate}}">Deportes extremos</option>
+                                                <option translate value="{{'Familia'|translate}}">Familia</option>
+                                                <option translate value="{{'Estilo de moda'|translate}}">Estilo de moda</option>
+                                                <option translate value="{{'Modelado Moda'|translate}}">Modelado Moda</option>
+                                                <option translate value="{{'Comida rapida'|translate}}">Comida rapida</option>
+                                                <option translate value="{{'Festivales de cine'|translate}}">Festivales de cine</option>
+                                                <option translate value="{{'Finanzas'|translate}}">Finanzas</option>
+                                                <option translate value="{{'Gimnasio'|translate}}">Gimnasio</option>
+                                                <option translate value="{{'Alimentos'|translate}}">Alimentos</option>
+                                                <option translate value="{{'Juegos'|translate}}">Juegos</option>
+                                                <option translate value="{{'Jardineria y paisajismo'|translate}}">Jardineria y paisajismo</option>
+                                                <option translate value="{{'Generadores'|translate}}">Generadores</option>
+                                                <option translate value="{{'Golf'|translate}}">Golf</option>
+                                                <option translate value="{{'Gobierno'|translate}}">Gobierno</option>
+                                                <option translate value="{{'GPS y navegacion'|translate}}">GPS y navegacion</option>
+                                                <option translate value="{{'Guitars'|translate}}">Guitars</option>
+                                                <option translate value="{{'Gimnasia'|translate}}">Gimnasia</option>
+                                                <option translate value="{{'Cuidado del cabello'|translate}}">Cuidado del cabello</option>
+                                                <option translate value="{{'Balonmano'|translate}}">Balonmano</option>
+                                                <option translate value="{{'Televisores de alta definicion'|translate}}">Televisores de alta definicion</option>
+                                                <option translate value="{{'Auriculares'|translate}}">Auriculares</option>
+                                                <option translate value="{{'Seguro de salud'|translate}}">Seguro de salud</option>
+                                                <option translate value="{{'Hockey'|translate}}">Hockey</option>
+                                                <option translate value="{{'Hogar &amp; Jardin'|translate}}">Hogar &amp; Jardin</option>
+                                                <option translate value="{{'Seguro del hogar'|translate}}">Seguro del hogar</option>
+                                                <option translate value="{{'Industria de la hospitalidad'|translate}}">Industria de la hospitalidad</option>
+                                                <option translate value="{{'Recursos humanos'|translate}}">Recursos humanos</option>
+                                                <option translate value="{{'Sentido del humor'|translate}}">Sentido del humor</option>
+                                                <option translate value="{{'Patinaje sobre hielo'|translate}}">Patinaje sobre hielo</option>
+                                                <option translate value="{{'Seguros'|translate}}">Seguros</option>
+                                                <option translate value="{{'Software Internet'|translate}}">Software Internet</option>
+                                                <option translate value="{{'Pasantias'|translate}}">Pasantias</option>
+                                                <option translate value="{{'Invertir'|translate}}">Invertir</option>
+                                                <option translate value="{{'Banca de inversion'|translate}}">Banca de inversion</option>
+                                                <option translate value="{{'Aplicaciones iOS'|translate}}">Aplicaciones iOS</option>
+                                                <option translate value="{{'Puestos de trabajo'|translate}}">Puestos de trabajo</option>
+                                                <option translate value="{{'Gestion del Conocimiento'|translate}}">Gestion del Conocimiento</option>
+                                                <option translate value="{{'Portatiles'|translate}}">Portatiles</option>
+                                                <option translate value="{{'Legal'|translate}}">Legal</option>
+                                                <option translate value="{{'Poder Legislativo'|translate}}">Poder Legislativo</option>
+                                                <option translate value="{{'Bibliotecas'|translate}}">Bibliotecas</option>
+                                                <option translate value="{{'Seguro de vida'|translate}}">Seguro de vida</option>
+                                                <option translate value="{{'Linux y Unix'|translate}}">Linux y Unix</option>
+                                                <option translate value="{{'Vive Comedia'|translate}}">Vive Comedia</option>
+                                                <option translate value="{{'Mac OS'|translate}}">Mac OS</option>
+                                                <option translate value="{{'Revistas'|translate}}">Revistas</option>
+                                                <option translate value="{{'Comercializacion'|translate}}">Comercializacion</option>
+                                                <option translate value="{{'Reproductores multimedia'|translate}}">Reproductores multimedia</option>
+                                                <option translate value="{{'Fusiones y Adquisiciones'|translate}}">Fusiones y Adquisiciones</option>
+                                                <option translate value="{{'Militar'|translate}}">Militar</option>
+                                                <option translate value="{{'Telefonos moviles'|translate}}">Telefonos moviles</option>
+                                                <option translate value="{{'Deportes de Motor'|translate}}">Deportes de Motor</option>
+                                                <option translate value="{{'Motocicletas'|translate}}">Motocicletas</option>
+                                                <option translate value="{{'Peliculas'|translate}}">Peliculas</option>
+                                                <option translate value="{{'Museos'|translate}}">Museos</option>
+                                                <option translate value="{{'Musica y audio'|translate}}">Musica y audio</option>
+                                                <option translate value="{{'Videos musicales'|translate}}">Videos musicales</option>
+                                                <option translate value="{{'Seguridad de la red'|translate}}">Seguridad de la red</option>
+                                                <option translate value="{{'Redes'|translate}}">Redes</option>
+                                                <option translate value="{{'Noticia'|translate}}">Noticia</option>
+                                                <option translate value="{{'Periodicos'|translate}}">Periodicos</option>
+                                                <option translate value="{{'Nintendo'|translate}}">Nintendo</option>
+                                                <option translate value="{{'Servicios de Oficina'|translate}}">Servicios de Oficina</option>
+                                                <option translate value="{{'Comunidades en linea'|translate}}">Comunidades en linea</option>
+                                                <option translate value="{{'Juegos en linea'|translate}}">Juegos en linea</option>
+                                                <option translate value="{{'Video Online'|translate}}">Video Online</option>
+                                                <option translate value="{{'Paintball'|translate}}">Paintball</option>
+                                                <option translate value="{{'Gafas de sol'|translate}}">Gafas de sol</option>
+                                                <option translate value="{{'Gestion de la cadena de suministro'|translate}}">Gestion de la cadena de suministro</option>
+                                                <option translate value="{{'Surf'|translate}}">Surf</option>
+                                                <option translate value="{{'Natacion'|translate}}">Natacion</option>
+                                                <option translate value="{{'Camisetas'|translate}}">Camisetas</option>
+                                                <option translate value="{{'Juegos de mesa'|translate}}">Juegos de mesa</option>
+                                                <option translate value="{{'Tecnologia'|translate}}">Tecnologia</option>
+                                                <option translate value="{{'Telemarketing'|translate}}">Telemarketing</option>
+                                                <option translate value="{{'Televisores'|translate}}">Televisores</option>
+                                                <option translate value="{{'Tenis'|translate}}">Tenis</option>
+                                                <option translate value="{{'Destinos Turisticos'|translate}}">Destinos Turisticos</option>
+                                                <option translate value="{{'Juguetes'|translate}}">Juguetes</option>
+                                                <option translate value="{{'Viajar'|translate}}">Viajar</option>
+                                                <option translate value="{{'Seguro de viaje'|translate}}">Seguro de viaje</option>
+                                                <option translate value="{{'Camiones'|translate}}">Camiones</option>
+                                                <option translate value="{{'Reality Shows de TV'|translate}}">Reality Shows de TV</option>
+                                                <option translate value="{{'Seguros de Vehiculos'|translate}}">Seguros de Vehiculos</option>
+                                                <option translate value="{{'Compartir videos'|translate}}">Compartir videos</option>
+                                                <option translate value="{{'Voleibol'|translate}}">Voleibol</option>
+                                                <option translate value="{{'Almacenamiento'|translate}}">Almacenamiento</option>
+                                                <option translate value="{{'Clima'|translate}}">Clima</option>
+                                                <option translate value="{{'Portales'|translate}}">Portales Web</option>
+                                                <option translate value="{{'Servicios web'|translate}}">Servicios web</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <span class="btn_guardar btn_mod btn-success" translate>Guardar</span>
+                                            <span class="btn_cancelar btn_mod btn-danger" translate>Cancelar</span>
+                                        </div>
+                                    </BOUCLE_conseguirFormulario>
+                                    </B_conseguirFormulario>
+                                        <div class="label-container col-sm-12 col-md-12 col-lg-12">
+                                            <a href="?page=btz_modificaperfil" translate>Crear</a>
+                                        </div>
+                                    <//B_conseguirFormulario>
+
+                                </BOUCLE_conseguirAutor>
+                                <!-- Dispositivos -->
+                                <div style="display: block">
+                                    <div class="label-principal col-sm-12 col-md-12 col-lg-12">
+                                        <span class="titulo-main" translate>Dispositivos</span>
+                                    </div>
+                                    <!-- Dispositivos -->
+                                    <div class="col-sm-12 col-md-12 col-lg-12" id="div-todos-dispo">
+                                        <BOUCLE_conseguirUsuario(registroreto){token=#GET{'token'}}>
+                                        <BOUCLE_conseguirDispositivos(btz_perfil_dispo){id_usuario=#ID_USUARIO}>
+                                        <div id="div-dispositivo-#ID_PERFIL_DISPO" class="col-sm-12 col-md-12 col-lg-12">
+                                            <i onclick="borrar_dispositivo('#ID_PERFIL_DISPO')" style="cursor: pointer" id="#ID_PERFIL_DISPO" class="fa fa-trash-o borrar_dispo" aria-hidden="true"></i> #TYPE, #BRAND, #MODEL, #OPERATINGSYSTEM, #OSVERSION
+                                        </div>
+                                        </BOUCLE_conseguirDispositivos>
+                                        </BOUCLE_conseguirUsuario>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <span id="btn_anadirDispositivo" style="cursor:pointer;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                                        <!-- LISTA DE DISPOSITIVOS -->
+                                        <div style="display: none" id="dispo_lista_div">
+                                            <label for="dispo_lista" translate>Selecciona dipositivo</label>
+                                            <br>
+                                            <select id="dispo_lista">
+                                                <option selected translate>Selecciona dipositivo</option>
+                                                <option translate value="22">Tablet</option>
+                                                <option translate value="20">Movil</option>
+                                                <option translate value="21">Ordenador</option>
+                                                <option translate value="">SmartWatch</option>
+                                                <option translate value="">tv</option>
+                                                <option translate value="">Consola</option>
+                                            </select>
+                                            <br>
+                                            <input value="next" type="button" id="dispo_next_so">
+                                        </div>
+                                        <!-- LISTA DE SISTEMAS OPERATIVOS -->
+                                        <div style="display: none" id="dispo_so_div">
+                                            <select id="dispo_so">
+                                                <option translate selected>Seleccione un SO</option>
+                                            </select>
+                                            <br>
+                                            <input value="next" type="button" id="dispo_next_version">
+                                        </div>
+                                        <!-- LISTA DE VERSIONES -->
+                                        <div style="display: none" id="dispo_version_div">
+                                            <select id="dispo_version">
+                                                <option translate selected>Seleccione la versión</option>
+                                            </select>
+                                            <br>
+                                            <input value="next" type="button" id="dispo_next_marca">
+                                        </div>
+                                        <!-- INTRODUCIR MARCA -->
+                                        <div style="display: none" id="dispo_marca_div">
+                                            <input id="dispo_marca" type="text" placeholder="{{'Introduce marca'|translate}}">
+                                            <br>
+                                            <input value="next" type="button" id="dispo_next_modelo">
+                                        </div>
+                                        <!-- INTRODUCIR MODELO -->
+                                        <div style="display: none" id="dispo_modelo_div">
+                                            <input id="dispo_modelo" type="text" placeholder="{{'Introduce modelo'|translate}}">
+                                            <br>
+                                            <input value="next" type="button" id="dispo_next_fin">
+                                        </div>
+                                    </div>
+                                    <!-- Compartir -->
+                                    <!--
+                                    <div class="label-principal col-sm-12 col-md-12 col-lg-12">
+                                        <span translate>Invitar</span>
+                                    </div>
+                                    <div class="label-container col-sm-12 col-md-12 col-lg-12">
+                                        <span>
+                                            <a href="?page=new_registrousuarioreto&inv=#GET{'token_url'}" translate>Enlace</a>
+                                        </span>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                                </B_conseguirDatosUsuario>
+                                    <h1 translate>No estas Conectado</h1>
+                                <//B_conseguirDatosUsuario>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PIE -->
+[(#INCLURE{fond=inclure/btz_pie_preguntas}{id=#GLOBALS{'embajadores'}})]
+[(#INCLURE{fond=inclure/aviso_cookies}{id_rubrique=#ID_RUBRIQUE})]
+</div>
+</body>
+</html>

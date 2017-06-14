@@ -1,0 +1,83 @@
+[(#REM) Verifier si le plugin taa limite les langues sinon on, affiche les langues du site]
+[(#CONFIG{taa/utiliser_langues}|?{
+	#SET{langues_dispos,#CONFIG{taa/utiliser_langues}},
+	#SET{langues_dispos,#CONFIG{langues_multilingue}|explode{','}}
+	})]
+<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
+	#SET{lang,#LANG}
+	#SET{langues_traduites,#ARRAY}
+	#SET{id_trad,#ID_RUBRIQUE}
+	#SET{trad_new,oui}	
+	<BOUCLE_trad(RUBRIQUES){traduction}{id_trad!=0}{tout}>
+	#SET{id_trad,#ID_TRAD}		
+	#SET{langues_traduites,	#GET{langues_traduites}|array_merge{#ARRAY{#LANG,#ID_RUBRIQUE}}}
+	#SET{trad_new,''}	
+	</BOUCLE_trad>
+	#SET{trads,#TOTAL_BOUCLE}
+	</B_trad>	
+	
+	<B_ld>
+		<div class="onglets_traduction rubriques barre_onglet">	
+		<ul>
+		<BOUCLE_ld(DATA){source tableau, #GET{langues_dispos}}>		
+		[(#GET{langues_traduites}|table_valeur{#VALEUR}|=={#GET{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
+			[(#VALEUR|array_key_exists{#GET{langues_traduites}}|?{
+				[(#VALEUR|=={#GET{lang}}|?{
+					<li class="box_onglet"><strong class="on">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>][(#VALEUR|traduire_nom_langue)]</strong></li>
+					,
+					<li class="traduit box_onglet">[(#GET{ref_#VALEUR}|oui)<div class="ref">*<span><:tra:rubrique_reference:></span></div>]<a href="[(#URL_ECRIRE{rubrique}|parametre_url{id_rubrique,#GET{langues_traduites}|table_valeur{#VALEUR}})]">[(#VALEUR|traduire_nom_langue)]</a></li>
+					})]
+					,	
+				#SET{non_traduits,oui}
+				[(#SET{donnees_trad,#VALEUR|destination_traduction{#GET{id_trad}}})]				
+				[(#VALEUR|=={#GET{lang}}|?{
+						<li class="non_traduit box_onglet"><strong class="on">[(#VALEUR|traduire_nom_langue)][(#GET{ref_#VALEUR}|oui)<span><:tra:rubrique_reference:></span>]</strong></li>
+						,
+						#SET{parent_trad,#GET{donnees_trad}|table_valeur{0}}
+						#SET{trad,#GET{donnees_trad}|table_valeur{1}}	
+						[(#GET{donnees_trad}|table_valeur{2}|oui)#SET{alert,class="avis_source"}]				
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit box_onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
+						})]	
+				})]
+		</BOUCLE_ld>
+		</ul>
+		[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+			[(#ENV{voir}|non)<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			]			
+		</div>	
+	</B_ld>
+[(#SET{icone_delier,		
+	[(#BOUTON_ACTION{
+		[(#CHEMIN{images/traductions-delete-24.gif}
+			|balise_img{'delete'}
+			|concat{' ',<:tra:trad_delier_rubrique:>})],
+		[(#URL_ACTION_AUTEUR{dereferencer_traduction_rubrique,rubrique/#ID_RUBRIQUE,#SELF})],ajax})]
+})]			
+[(#ENV{voir}|oui) 
+<div class="changer [(#ENV{voir}|?{cadre-e,defaut})]">
+[(#GET{trads}|>{1}
+	|ou{[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})]}
+	|ou{[(#AUTORISER{creerrubriquedans,rubrique,#ID_PARENT})]})
+	[(#SET{identifiant,[(#VAL{trad_#ID_RUBRIQUE})]})]
+	[(#SET{icone,[(#CHEMIN{images/tradrub-22.png}|url_absolue)]})]
+	]
+
+	[(#AUTORISER{creerrubriquedans,rubrique,#ID_PARENT})
+		[(#GET{non_traduits}|oui)
+			<div class="ajouter_trads">
+			[(#FORMULAIRE_AJOUTER_TRADUCTION{#ID_RUBRIQUE})]
+			</div>
+			]
+		]
+	
+	[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+		[(#ID_TRAD|oui)
+			[<div class='icone_delier_traduction'>(#GET{icone_delier})</div>]
+		]
+		
+	]
+</div>		
+]
+</BOUCLE_rub>
+<br class="nettoyeur" />

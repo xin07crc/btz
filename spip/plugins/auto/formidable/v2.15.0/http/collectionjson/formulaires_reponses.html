@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,#ENV{date_sens,-1},
+	maj,#ENV{date_sens,-1},
+	id_formulaires_reponse,1,
+	points,-1,
+}})]
+
+{
+	"collection": {
+		"version": "1.0",
+		"href": "[(#URL_SITE_SPIP|concat{/http.api/collectionjson/formulaires_reponses}|url_absolue)]",
+		"title": "#NOM_SITE_SPIP - <:formidable:reponses_liste:>",
+		"updated": "[(#DATE|date_iso)]"
+		<B_formulaires_reponses>
+		,
+		"links": [
+			{"rel":"self", "type":"application/json", "href":"[(#VAL{&}|self|url_absolue)]"}[,
+			(#PAGINATION{collectionjson})]
+		],
+		"totalResults": #GRAND_TOTAL,
+		"startIndex": #ENV{debut_formulaires_reponses,0},
+		"itemsPerPage": #ENV{pagination,100},
+		"items": [
+		<BOUCLE_formulaires_reponses(FORMULAIRES_REPONSES)
+			{id_formulaire?}
+			{statut IN #ENV{statut,#LISTE{publie}}}
+			{id_auteur?}
+			{cookie?}
+			{recherche?}
+			{tri #ENV{par,#ENV{recherche}|?{points,date}},#GET{defaut_tri}}
+			{pagination #ENV{pagination,100}}{","}
+		>
+			<INCLURE{fond=http/collectionjson/inc-formulaires_reponse, id_formulaires_reponse, mode, url_self=#SELF}>
+		</BOUCLE_formulaires_reponses>
+		]
+		</B_formulaires_reponses>
+	}
+}

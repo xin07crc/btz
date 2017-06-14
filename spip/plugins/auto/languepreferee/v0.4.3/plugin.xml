@@ -1,0 +1,36 @@
+<plugin>
+	<nom>Langue pr&#233;f&#233;r&#233;e</nom>
+	<slogan>Diriger l'internaute vers le secteur de sa langue</slogan>
+	<auteur>Nicolas Hoizey, Chryjs, BobCaTT</auteur>
+	<licence>&#169; 2007-2012 GNU/GPL</licence>
+	<version>0.4.3</version>
+	<etat>stable</etat>
+	<icon>langue-preferee.png</icon>
+	<description>
+		<multi>
+		[fr]Ce plugin permet d'identifier les langues pr&#233;f&#233;r&#233;es configur&#233;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
+Ce m&#233;canisme suppose qu'il n'y a pas de page sommaire particuli&#232;re, les pages d'accueil localis&#233;es &#233;tant des pages de secteurs.
+
+Utilisez la balise <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> en ins&#233;rant le code suivant dans <code>sommaire.html</code>, &#224; l'exclusion de tout autre code, pour que l'internaute soit redirig&#233; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur : <code>[(#LANGUE_PREFEREE_SECTEUR_REDIRECTION|sinon{Activer le plugin langue_preferee})]</code>
+
+Si aucune langue disponible n'est compatible avec les choix configur&#233;s dans le navigateur, la langue par d&#233;faut du site est choisie. Si cette langue n'est utilis&#233;e par aucun secteur (!!!), le premier secteur trouv&#233; est choisi.
+Il est possible de filtrer le ou les secteurs pour ne par rediriger vers un secteur non souhait&#233;. Pour cela mettez la liste des secteurs non souhait&#233;s s&#233;par&#233;s par des virgules en param&#232;tre de <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code>, par exemple : <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION{"3,12"}</code>, la balise ne pourra pas rediriger ni vers le secteur 3, ni vers le 12.
+
+Il est possible de laisser l'internaute choisir sa langue pr&#233;f&#233;r&#233;e, diff&#233;rente de celle configur&#233;e dans son navigateur, en la pr&#233;cisant en param&#232;tre d'appel du sommaire, avec <code>/?lang=fr</code> par exemple pour le fran&#231;ais. Ce choix est alors stock&#233; dans un cookie pour utilisation ult&#233;rieure prioritaire sur la configuration du navigateur. La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
+<code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalise}</code> permet de remplacer le message propos&#233; par d&#233;faut.
+	[en]This plugin (for SPIP 1.9.2+ and 2.0.0+) checks the visitor browser prefered languages and redirects automagically to this language within a multi language website having one section per language. It requiers not to have a specific sommaire page, the home pages will be localized to each sectors.
+
+Use only the <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> tag by putting the following code in <code>sommaire.html</code>, but any other code, allowing each visitors to be redirected to the most meaningful sector: [(#LANGUE_PREFEREE_SECTEUR_REDIRECTION|sinon{Activate the langue_preferee plugin})]
+
+If not any website language suits the visitor's preferred language, the website default language is selected. By the way, if this language is not used by any sector (yes you can !), the first avalaible sector is selected. It's also possible to exclude some sectors from the possible redirections. In this case, just add as parameter a comma seperated list of unwanted sectors to <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code>, for example: <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION{"3,12"}</code>, the tag can not redirect to sector 3 or 12.
+
+It's possible to let the visitor choose it's own preferred language, that may be different from its browser, by adding (for example selecting english) <code>/?lang=en</code> calling sommaire page. Therefore this choice is stored in a cookie for further use and will take precedence to the browser preference. The <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> tag allows you to add a link allowing to remove this cookie. Using a parameter like: <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{my own message}</code> prompts your "own message" instead of the default one.
+		</multi>
+   </description>
+	<lien>http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute</lien>
+   <chemin dir='' />
+	<prefix>languepreferee</prefix>
+	<options>languepreferee_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
+	<categorie>navigation</categorie>
+</plugin>

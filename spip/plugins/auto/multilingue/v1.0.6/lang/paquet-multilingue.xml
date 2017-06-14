@@ -1,0 +1,18 @@
+<traduction module="paquet-multilingue" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/multilingue/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=ru" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=sk" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>

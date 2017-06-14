@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+            <li class="fieldset">
+                <fieldset><legend><:multilingue:logo_objet:></legend>
+                 <ul>
+                <li class="editer_logo_objet [(#ENV**{erreurs}|table_valeur{desactiver_traduction_logo_objet}|oui)erreur]">
+                    <label for="menu_langue"><:multilingue:desactiver_traduction_logo_objet:></label>
+                    <p class="explication"><:multilingue:explication_desactiver_traduction_logo_objet:></p>
+                    <div class="choix">
+                        <input type='checkbox' name='desactiver_traduction_logo_objet' id='desactiver_traduction_logo_objet' value="select" class="checkbox" [(#ENV{desactiver_traduction_logo_objet}|oui) checked="checked"]/>
+                        <label for="champ_rubrique_non"><:multilingue:oui:></label>
+                        
+                    </div>
+                </li>
+                </ul>
+                </fieldset>
+            </li>		    
+		    
+			<li class="fieldset">
+				<fieldset><legend><:multilingue:menu_langue:></legend>
+				 <ul>
+		        <li class="editer_menu_langue [(#ENV**{erreurs}|table_valeur{menu_langue}|oui)erreur]">
+					<label for="menu_langue"><:multilingue:afficher_menu_select:></label>
+                    <p class="explication"><:multilingue:precision_menu_select:></p>
+					<div class="choix">
+						<input type='checkbox' name='menu_langue' id='menu_langue' value="select" class="checkbox" [(#ENV{menu_langue}|oui) checked="checked"]/>
+						<label for="champ_rubrique_non"><:multilingue:oui:></label>
+					</div>
+		        </li>
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+		
+	</div></form>
+</div>

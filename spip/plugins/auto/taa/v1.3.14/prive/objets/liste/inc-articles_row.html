@@ -1,0 +1,39 @@
+<tr class="#ENV{class}">
+<BOUCLE_art(ARTICLES){id_article}{statut?}>#SET{id_trad,#ID_TRAD}#SET{id_article,#ID_ARTICLE}
+	<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+	<td class='rang'>#RANG</td>
+	<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+	<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+	<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+	<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+		<a href="[(#ENV{mode}|=={edition_seule}|?{[(#ID_ARTICLE|generer_url_entite{article})],[(#URL_ECRIRE{articles_edit,id_article=#ID_ARTICLE})]})]">#ID_ARTICLE</a>,
+		#ID_ARTICLE
+		})]</td>
+	[(#ENV{trads}|oui)<td class="trad">]	
+	
+	<BOUCLE_art_trads(ARTICLES){traduction}{id_mot?}{id_auteur?}{statut IN prepa,publie,prop}{id_article!=#ID_ARTICLE}>
+	[(#ENV{trads}|oui)	
+		[(#ENV{voir}|!={#ID_TRAD}|?{
+			<span>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]&nbsp;[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
+				<a href="[(#ID_ARTICLE|generer_url_entite{article})]" title="#TITRE / <:info_numero_abbreviation:>#ID_ARTICLE">#LANG</a>,
+				#LANG
+				})]
+			</span>,
+			&nbsp;
+			})]
+		]
+	</BOUCLE_art_trads>		
+	[(#ENV{trads}|oui)
+			<div>
+			[(#ENV{voir}|=={#ID_TRAD}|?{<a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="[(#CHEMIN{prive/images/deplierbas.gif})]" alt="replier"/></a>,<a class="ajax" href="[(#SELF|parametre_url{voir,#ID_TRAD})]" title="<:taa:voir_traductions:>"><img src="[(#CHEMIN{prive/images/deplierhaut.gif})]" alt="deplier"/></a>})]
+			</div>
+	</td>]
+	</B_art_trads>		
+</BOUCLE_art>
+<tr>
+
+	[(#ENV{voir}|=={#GET{id_trad}}|oui)
+		<INCLURE{fond=prive/objets/liste/inc-articles_trads_detail}{id_trad=#GET{id_trad}}{id_article=#GET{id_article}}{env}/>
+		]
+	
+

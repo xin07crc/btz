@@ -1,0 +1,45 @@
+<BOUCLE_seccionPadre(RUBRIQUES){lang=#ENV{lang}}{par titre}{id_parent=0}>
+    <BOUCLE_seccionPreguntas(RUBRIQUES){lang=#ENV{lang}}{par titre}{id_parent=#ID_RUBRIQUE}{titre_mot=formularios}>
+        <BOUCLE_conseguirArticulos(ARTICLES){id_rubrique=#ID_RUBRIQUE}{titre_mot=embajador}>
+            #TEXTE
+        </BOUCLE_conseguirArticulos>
+    </BOUCLE_seccionPreguntas>
+</BOUCLE_seccionPadre>
+<h3>{{titulo}}</h3>
+<div class="formulaire_spip formulaire_demo">
+    [<p class='success'>(#ENV*{message_ok})</p>]
+    [<p class='error'>(#ENV*{message_erreur})</p>]
+    [(#ENV*{message_ok}|non)
+        <form action="index.php?page=crear_embajador" enctype="multipart/form-data" method="POST" name="form" novalidate>
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <div class="contact-to col-xs-12 col-sm-6 col-md-6 col-lg-6 crear_embajador_organizacion">
+                <h4>{{organizacion}}</h4>
+                <input required type="text" value="#ENV{nombre_corporativo}" name="nombre_corporativo" placeholder="{{nombre_corporativo}}">
+                <input type="text" value="#ENV{acronimo}" name="acronimo" placeholder="{{acronimo}}">
+                <input required type="url" value="#ENV{enlace}" name="enlace" placeholder="{{enlace}}">
+                <p style="float: left;clear: left">{{logo}}</p>
+                <input style="clear: left" type="file" name="imagen" id="upload-photo">
+            </div>
+            <div class="contact-to col-xs-12 col-sm-6 col-md-6 col-lg-6 crear_embajador_contacto">
+                <h4>{{contacto}}</h4>
+                <input required type="text" value="#ENV{nombre}" name="nombre" placeholder="{{nombre}}">
+                <input required type="email" value="#ENV{mail}" name="mail" placeholder="{{mail}}">
+                <input type="text" value="#ENV{telefono}" name="telefono" placeholder="{{telefono}}">
+            </div>
+            <div style="text-align: center" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img style="width: 122px;" id="captcha" src="./test/test_ionic/www/lib/securimage/securimage_show.php" alt="CAPTCHA Image" />
+                <br>
+                <input type="text" name="captcha_code" size="10" maxlength="6" />
+                <a href="#" onclick="document.getElementById('captcha').src = './test/test_ionic/www/lib/securimage/securimage_show.php?' + Math.random(); return false">
+                    <img src="./test/test_ionic/www/img/mensajes/reload.svg">
+                </a>
+                <br>
+                <br>
+            </div>
+            <div style="text-align: center" class="contact-to  col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input required type="submit" name="enviar" value="{{enviar}}">
+            </div>
+            <p style="clear: left;text-align: center">{{obligatorios}}</p>
+        </form>
+    ]
+</div>

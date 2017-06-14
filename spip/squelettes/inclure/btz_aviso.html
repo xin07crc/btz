@@ -1,0 +1,11 @@
+
+    <BOUCLE_conseguir_perfil(registroreto){token=#TOKEN}>
+        <BOUCLE_conseguirPerfil(btz_perfilsdc){id_usuario=#ID_USUARIO}>
+            #SET{'numero', #COMPTEUR_BOUCLE}
+        </BOUCLE_conseguirPerfil>
+        [(#GET{'numero'}|=={0}|oui)
+            <p class='success' style="float: left; width: 100%">
+                No has completado el perfil Socio Demograficooooo
+            </p>
+        ]
+    </BOUCLE_conseguir_perfil>
